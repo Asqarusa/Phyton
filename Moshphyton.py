@@ -65,16 +65,14 @@
 # else:
 #     print("You need ID to enter")
 
-# weight = input()
-# choose = input("(K)g or (L)b: ")
-# typeW = ()
-# choose == typeW
-# if typeW ==("K","k"):
-#     calc = weight  * 2.20462
-#     print("Your waight in Lb" + calc)  # convert weight to pounds
-# elif typeW==("l","L"):
-#     calc = weight / 2.20462
-#     print("Your waight in Kg" + calc)  # convert weight to kilograms
+weight = int(input("Weight: "))
+choose = input("(K)g or (L)b: ")
+if choose.upper() =="K":
+    calc = weight / 0.45
+    print("Your waight in Lb: " + str(calc))  # convert weight to pounds
+else:
+    calc = weight * 0.45
+    print("Your waight in Kg: " + str(calc))  # convert weight to kilograms
 
 
 
