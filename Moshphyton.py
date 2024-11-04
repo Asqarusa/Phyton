@@ -39,6 +39,43 @@
 # print(x)
 
 
+# Comparision operators
+# x =3>=2
+# x =3<=2
+# x =3>2
+# x =3<2
+# x = 3==2 #equal
+# x = 3!=2 #not equal
+# x =3<2
+
+# Logical operators
+# price = 5
+# print(price > 10 and price< 30) #True exactly
+# print(price > 10 or price< 30) #at least one  True
+# print(not price > 10 ) #Teskari
+
+# IF Statements
+
+# age = 19
+# if age > 21:
+#     print("enough Age to enter")
+#     print("You don't need ID")
+# elif age < 15:
+#     print("not enough age to enter")
+# else:
+#     print("You need ID to enter")
+
+# weight = input()
+# choose = input("(K)g or (L)b: ")
+# typeW = ()
+# choose == typeW
+# if typeW ==("K","k"):
+#     calc = weight  * 2.20462
+#     print("Your waight in Lb" + calc)  # convert weight to pounds
+# elif typeW==("l","L"):
+#     calc = weight / 2.20462
+#     print("Your waight in Kg" + calc)  # convert weight to kilograms
+
 
 
 
