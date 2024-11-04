@@ -65,14 +65,64 @@
 # else:
 #     print("You need ID to enter")
 
-weight = int(input("Weight: "))
-choose = input("(K)g or (L)b: ")
-if choose.upper() =="K":
-    calc = weight / 0.45
-    print("Your waight in Lb: " + str(calc))  # convert weight to pounds
-else:
-    calc = weight * 0.45
-    print("Your waight in Kg: " + str(calc))  # convert weight to kilograms
+# weight = int(input("Weight: "))
+# choose = input("(K)g or (L)b: ")
+# if choose.upper() =="K":
+#     calc = weight / 0.45
+#     print("Your waight in Lb: " + str(calc))  # convert weight to pounds
+# else:
+#     calc = weight * 0.45
+#     print("Your waight in Kg: " + str(calc))  # convert weight to kilograms
+
+# # while 
+# i = 1
+# while i <= 10:
+#     print(i)
+#     i += 1
+# while 
+# i = 10
+# while i >= 1:
+#     print(i * "*")
+#     i -= 1
+# i = 1
+# while i >= 10:
+#     print(i * "*")
+#     i += 1
+
+#  Lists 
+# numbers = [1, 2, 3, 4, 5]
+# print(numbers[0])
+# print(numbers[-1])# - minus means from last item
+# names = ["John", "Kane", "mary", "Allan"]
+# names[0]= "John",
+# print(names)
+# names.append("John") # add item to the end of the list
+# names.insert(0, "John") # add item to the beginning of the list
+# names.remove("John") # remove item from the list
+# names.pop(0) # remove item from the list by index
+# print(len(names)) 
+
+# For loops
+# numbers = [1,2,3,4,5]
+# # for item in numbers:
+#     # print(item) # print each item in the list
+
+# i = 0
+# while i < len(numbers):
+#     print(numbers[i])
+    # i+=1
+
+
+# Range function
+# num = range(5, 12, 3)
+# print(num)
+# for number in range(8):
+    # print(number)\
+
+
+# Tuples
+# numbers = (1,2,3) # unchangeble = immunable = o'zgarmidi
+# print(numbers[0])
 
 
 
