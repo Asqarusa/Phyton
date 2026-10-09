@@ -1,0 +1,26 @@
+# Sample URLs for the phishing URL checker.
+# One URL per line. Lines starting with # are ignored.
+# Mix of clearly legit sites and textbook phishing tricks.
+
+# --- Legit sites (should score LOW RISK) ---
+https://www.google.com
+https://github.com
+https://www.paypal.com
+
+# --- Suspicious: raw IP address instead of a domain ---
+http://192.168.1.100/login
+
+# --- Suspicious: suspicious TLD + brand imitation ---
+http://paypal-login-verify.xyz/signin
+
+# --- Suspicious: the "@" trick ---
+https://paypal.com@account-reset-secure.top/verify
+
+# --- Suspicious: URL shortener hiding the destination ---
+https://bit.ly/3xFreePrize
+
+# --- Suspicious: many subdomains pushing the real host to the right ---
+http://login.apple.id.account.verify.malicious-site.club/reset
+
+# --- Suspicious: excessive hyphens + long URL padding ---
+http://secure-bankofamerica-account-verify-online-support-work.tk/login?session=ab12cd34ef56gh78ij90kl&redirect=https%3A%2F%2Fexample.com%2Fvery%2Flong%2Fpath%2Fto%2Fpad%2Fthe%2Furl
