@@ -1,0 +1,21 @@
+# Sample Linux authentication log (auth.log style)
+# Format: Month Day Time server sshd[pid]: message from IP_ADDRESS
+Oct  8 09:12:01 server sshd[2211]: Failed password for root from 185.220.101.4 port 51234 ssh2
+Oct  8 09:12:04 server sshd[2211]: Failed password for root from 185.220.101.4 port 51234 ssh2
+Oct  8 09:12:09 server sshd[2211]: Failed password for root from 185.220.101.4 port 51234 ssh2
+Oct  8 09:12:14 server sshd[2211]: Failed password for admin from 185.220.101.4 port 51235 ssh2
+Oct  8 09:12:19 server sshd[2211]: Failed password for admin from 185.220.101.4 port 51235 ssh2
+Oct  8 09:12:24 server sshd[2211]: Failed password for root from 185.220.101.4 port 51236 ssh2
+Oct  8 09:14:44 server sshd[2310]: Accepted password for askarbek from 192.168.1.25 port 44310 ssh2
+Oct  8 09:31:02 server sshd[2440]: Failed password for root from 45.148.10.88 port 60111 ssh2
+Oct  8 09:31:07 server sshd[2440]: Failed password for root from 45.148.10.88 port 60111 ssh2
+Oct  8 10:02:55 server sshd[2501]: Accepted password for askarbek from 192.168.1.25 port 44312 ssh2
+Oct  8 10:20:11 server sshd[2601]: Failed password for test from 185.220.101.4 port 51300 ssh2
+Oct  8 10:20:16 server sshd[2601]: Failed password for test from 185.220.101.4 port 51301 ssh2
+Oct  8 11:05:33 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:05:38 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:05:43 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:05:48 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:05:53 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:05:58 server sshd[2702]: Failed password for root from 91.203.67.5 port 44021 ssh2
+Oct  8 11:42:10 server sshd[2810]: Accepted password for maria from 10.0.0.14 port 55201 ssh2
