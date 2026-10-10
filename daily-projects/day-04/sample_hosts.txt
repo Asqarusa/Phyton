@@ -1,0 +1,4 @@
+# Demo host allow-list — pretend this controls who can reach the server
+10.0.0.10  webserver-01
+10.0.0.11  db-01
+10.0.0.12  backup-01

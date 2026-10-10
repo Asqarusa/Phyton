@@ -1,0 +1,4 @@
+# Files for the integrity checker to watch (one path per line).
+# Lines starting with # are comments. Paths are relative to this folder.
+sample_config.txt
+sample_hosts.txt

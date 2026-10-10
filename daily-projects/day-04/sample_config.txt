@@ -1,0 +1,5 @@
+# Demo system config — pretend this is a critical file an attacker might alter
+hostname=webserver-01
+admin_email=ops@example.com
+backup_enabled=true
+allowed_ips=10.0.0.10,10.0.0.11
