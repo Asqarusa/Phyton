@@ -1,0 +1,24 @@
+# Sample auth log for auth_log_parser.py
+# Format mirrors a real Linux /var/log/auth.log (sshd lines).
+# Story: one attacker IP brute-forcing 'root' overnight, plus normal admin use.
+Oct 11 08:02:11 webserver sshd[1021]: Failed password for root from 203.0.113.7 port 51234 ssh2
+Oct 11 08:02:19 webserver sshd[1022]: Failed password for root from 203.0.113.7 port 51235 ssh2
+Oct 11 08:02:31 webserver sshd[1023]: Failed password for invalid user admin from 203.0.113.7 port 51236 ssh2
+Oct 11 08:03:04 webserver sshd[1024]: Failed password for root from 203.0.113.7 port 51237 ssh2
+Oct 11 08:04:52 webserver sshd[1025]: Accepted password for deploy from 10.0.0.15 port 41102 ssh2
+Oct 11 08:05:17 webserver sshd[1026]: Failed password for root from 203.0.113.7 port 51238 ssh2
+Oct 11 08:06:40 webserver sshd[1027]: Failed password for root from 203.0.113.7 port 51239 ssh2
+Oct 11 09:14:02 webserver sshd[1101]: Failed password for root from 203.0.113.7 port 52100 ssh2
+Oct 11 09:14:15 webserver sshd[1102]: Failed password for root from 203.0.113.7 port 52101 ssh2
+Oct 11 09:15:33 webserver sshd[1103]: Accepted password for aakhrorov from 10.0.0.15 port 42011 ssh2
+Oct 11 09:16:01 webserver sshd[1104]: Failed password for aakhrorov from 10.0.0.15 port 42012 ssh2
+Oct 11 09:16:20 webserver sshd[1105]: Accepted password for aakhrorov from 10.0.0.15 port 42013 ssh2
+Oct 11 10:44:55 webserver sshd[1201]: Failed password for root from 198.51.100.44 port 33021 ssh2
+Oct 11 10:45:02 webserver sshd[1202]: Failed password for root from 198.51.100.44 port 33022 ssh2
+Oct 11 10:45:09 webserver sshd[1203]: Failed password for oracle from 198.51.100.44 port 33023 ssh2
+Oct 11 10:45:16 webserver sshd[1204]: Failed password for postgres from 198.51.100.44 port 33024 ssh2
+Oct 11 10:45:23 webserver sshd[1205]: Failed password for root from 198.51.100.44 port 33025 ssh2
+Oct 11 10:45:30 webserver sshd[1206]: Failed password for root from 198.51.100.44 port 33026 ssh2
+Oct 11 11:30:00 webserver sshd[1301]: Accepted password for deploy from 10.0.0.15 port 43100 ssh2
+Oct 11 12:05:41 webserver sshd[1401]: Failed password for aakhrorov from 192.0.2.9 port 22110 ssh2
+Oct 11 12:05:50 webserver sshd[1402]: Failed password for aakhrorov from 192.0.2.9 port 22111 ssh2
