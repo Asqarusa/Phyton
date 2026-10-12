@@ -1,0 +1,6 @@
+Hello! This is a sample file for the hash identifier demo.
+Change any single character in this file and run the script again —
+you will see that ALL of the fingerprints change completely.
+
+That is called the "avalanche effect", and it is exactly why
+cybersecurity analysts use hashes to detect tampered files.
