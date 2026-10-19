@@ -1,0 +1,19 @@
+From: "Maya Rivera" <maya.rivera@example.com>
+Return-Path: <maya.rivera@example.com>
+Subject: Notes from today's study group
+Date: Fri, 16 Oct 2026 18:02:41 +0000
+Message-ID: <a1b2c3d4@example.com>
+Received: from mail.example.com (mail.example.com [198.51.100.25])
+        by mx.receiver.example with ESMTPS id p9GQ88x2
+        for <friend@example.com>; Fri, 16 Oct 2026 18:02:44 +0000
+Authentication-Results: mx.receiver.example;
+        spf=pass smtp.mailfrom=example.com;
+        dkim=pass header.d=example.com;
+        dmarc=pass action=none
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi! Here are my notes from the study group session. Let me know if you want
+the slides too. Coffee next week?
+
+- Maya
