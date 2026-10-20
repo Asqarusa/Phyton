@@ -1,0 +1,15 @@
+# Sample domains for the DGA detector (one per line; # = comment)
+# Mix of normal human domains and machine-generated-looking ones.
+google.com
+github.com
+wikipedia.org
+xkqzptmwbvdr1234.top
+q7f2k9d4m1x8z3.xyz
+login-secure-verify-account-8891.info
+microsoft.com
+bvcrtdxplmnqswz19.buzz
+a.b.c.d.tracker-data.click
+example.com
+rowan-cabarrus.edu
+zqxjklmvprtwnd8374.gdn
+k7q9z2w4x6v8b1d3p5f0rtw19zx.xyz
