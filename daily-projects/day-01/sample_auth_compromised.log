@@ -1,0 +1,18 @@
+# Sample auth log: a brute-force attack that SUCCEEDS (compromise scenario)
+# Use this with: python3 brute_force_detector.py --log sample_auth_compromised.log
+# The attacker (203.0.113.77) guesses 8 times, then one guess WORKS —
+# the detector must flag this IP as CRITICAL, not just suspicious.
+# NOTE: all IPs below are RFC 5737 documentation ranges — never real machines.
+Oct  9 02:14:03 server sshd[3101]: Failed password for root from 203.0.113.77 port 52210 ssh2
+Oct  9 02:14:11 server sshd[3101]: Failed password for root from 203.0.113.77 port 52211 ssh2
+Oct  9 02:14:19 server sshd[3101]: Failed password for admin from 203.0.113.77 port 52212 ssh2
+Oct  9 02:14:27 server sshd[3101]: Failed password for admin from 203.0.113.77 port 52213 ssh2
+Oct  9 02:14:35 server sshd[3101]: Failed password for root from 203.0.113.77 port 52214 ssh2
+Oct  9 02:14:44 server sshd[3101]: Failed password for test from 203.0.113.77 port 52215 ssh2
+Oct  9 02:14:52 server sshd[3101]: Failed password for test from 203.0.113.77 port 52216 ssh2
+Oct  9 02:15:01 server sshd[3101]: Failed password for deploy from 203.0.113.77 port 52217 ssh2
+Oct  9 02:15:03 server sshd[3101]: Accepted password for deploy from 203.0.113.77 port 52218 ssh2
+Oct  9 02:15:04 server sshd[3101]: pam_unix(sshd:session): session opened for user deploy by (uid=0)
+Oct  9 08:02:11 server sshd[3302]: Accepted password for askarbek from 192.168.1.25 port 44310 ssh2
+Oct  9 08:20:44 server sshd[3310]: Failed password for root from 198.51.100.9 port 60111 ssh2
+Oct  9 08:20:49 server sshd[3310]: Failed password for root from 198.51.100.9 port 60111 ssh2
