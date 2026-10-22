@@ -1,6 +1,32 @@
 # DNS Lookup Tool — Plain-English Guide
 
 *Part of my "learn cybersecurity by building tiny tools" series. Day 3, evening project.*
+*Last updated: 2026-10-22 — improved version (see "What's new" below).*
+
+## What's new in this version
+
+Like a good phone book, a good tool should get better with each edition. I went back
+through my Day 3 DNS lookup tool and made it genuinely more useful:
+
+- **Forward-confirmed reverse DNS (FCrDNS).** For every reverse lookup, the tool now
+  checks whether the name points *back* to the same IP address. Think of it like this:
+  you call a number, someone says "this is the bank" — then you hang up and call the
+  bank's official number to check it's really them. Spam filters do exactly this to
+  judge whether a mail server is who it claims to be.
+- **Input validation.** Feed it junk like `not a domain!!` and it now says **INVALID**
+  instead of confusing you with a weird error. It also strips ports and paths, so
+  `example.com:8080/page` still works.
+- **Proper command-line flags.** Real `--examples`, `--json`, `--timeout`, and
+  `--no-reverse` options instead of hand-rolled argument parsing — plus a `--help`
+  screen that documents everything.
+- **JSON output (`--json`).** Machine-readable results, so another script can consume
+  the tool's answers — a small step toward building real toolchains.
+- **Per-step timing and a batch summary.** Each lookup shows its own time, and when
+  you check several domains you get a summary table comparing them all at a glance.
+- **Friendly failures.** Timeouts and missing networks now produce clear messages
+  ("Timed out resolving…") instead of tracebacks.
+
+## The big idea (start here)
 
 ## The big idea (start here)
 
@@ -42,9 +68,22 @@ Run it with your own domains or with `--examples` to use built-in sample domains
 - **`reverse_lookup(ip_address)`** — calls `socket.gethostbyaddr(ip_address)`. This asks
   for the **PTR record** — the reverse page of the phone book. Lots of IPs don't have
   one registered, and the script says so plainly instead of crashing.
+- **`is_valid_domain(domain)`** — the bouncer at the door. Uses a regular expression
+  to check the input actually looks like a domain (letters, digits, hyphens, at least
+  one dot). Junk gets flagged **INVALID** with a clear message before any network
+  call happens.
+- **`forward_confirmed(ip, ptr_name)`** — the "call back to verify" step. Takes the
+  name the PTR record claims and resolves it forward; if the same IP comes back, the
+  reverse record is *confirmed*. Spam filters (like Gmail's) really do run this check.
+- **`argparse`** — Python's standard library for command-line options. This is what
+  real tools use for `--help`, `--json`, `--timeout`: defined once, documented
+  automatically.
+- **`--json`** — prints the whole result set as JSON. Same data, different shape:
+  humans get the pretty table, scripts get the JSON. Both come from one code path.
 - **The `try/except` blocks** — DNS can fail for boring reasons (typo in the name, no
   network, no reverse record). Instead of crashing, each lookup returns a friendly
-  "couldn't resolve" message. Handling errors gracefully is a real-world skill.
+  "couldn't resolve" message. Timeouts now get their own clear message too.
+  Handling errors gracefully is a real-world skill.
 - **`time.perf_counter()`** — a stopwatch around the lookups. DNS answers in
   milliseconds, and seeing the number makes that real.
 - **The input cleanup in `main()`** — strips `http://`, trailing slashes, and paths,
@@ -69,11 +108,17 @@ Run it with your own domains or with `--examples` to use built-in sample domains
 # Built-in examples (safe, no typing needed)
 python3 dns_lookup_tool.py --examples
 
-# Your own domains
+# Your own domains, with a batch summary table
 python3 dns_lookup_tool.py example.com github.com
 
 # Messy input is cleaned up automatically
-python3 dns_lookup_tool.py https://example.com/some/page
+python3 dns_lookup_tool.py https://example.com:8080/some/page
+
+# Machine-readable JSON for other scripts
+python3 dns_lookup_tool.py example.com --json
+
+# Skip reverse lookups (faster), custom timeout
+python3 dns_lookup_tool.py example.com --no-reverse --timeout 3
 ```
 
 ## Why this matters for cybersecurity
