@@ -8,15 +8,26 @@ Imagine you're a security guard watching a building with a sign-in book. Every v
 
 Linux servers keep exactly this kind of sign-in book: a file called the **auth log** (`/var/log/auth.log`) that records every login attempt — who tried, from which computer, and whether they got in. SOC (Security Operations Center) analysts read these logs all day, looking for the same patterns our guard found: one IP hammering the server, unusual usernames being tried, spikes at odd hours. This script does the first pass for them — it turns raw log lines into a readable summary with the red flags highlighted.
 
+## What's new in this version (improved 2026-10-26)
+
+Think of the original as a guard who counted knocks on the door. The improved version is a guard who also notices *when the door finally opens after all that knocking* — and who can hand you the report in a spreadsheet-friendly format:
+
+- **Success-after-failures alerts (the big one).** If an IP fails 3+ times for the same username and then suddenly logs in successfully, the report flags it urgently (`[!!!]`). Knocking alone is suspicious; knocking and then getting in can mean a password was guessed. In the new built-in `--demo`, an attacker fails 5 times as `root` and then gets in — and the script catches it.
+- **Command-line flags.** `--threshold` sets how many failed attempts put an IP on the watchlist (default 5), `--top` sets how many top IPs/usernames to show, and `--logfile` picks the file — no more editing the script to change a number.
+- **`--json` output.** The same summary as structured JSON, so it can feed a spreadsheet, a dashboard, or the next tool in a pipeline instead of only being read by a human.
+- **`--demo` mode.** A built-in sample story (the guessed-password case above) runs with no file at all — handy for learning or testing the script on a fresh machine.
+- **Friendlier errors and honest counts.** A missing file, a folder passed by mistake, or a bad flag now explains itself instead of crashing, and lines that aren't login lines are counted as "Lines skipped" instead of silently vanishing (comments and blank lines still don't count).
+
 ## What the script does
 
-Given an auth log file, it prints a summary report with five sections:
+Given an auth log file, it prints a summary report with six sections:
 
 1. **Totals** — how many login attempts, and how many succeeded vs. failed.
 2. **Top source IPs** — which computers knocked on the door most often.
 3. **Attempts by hour** — a mini bar chart showing *when* the attempts happened. A sudden spike is often the fingerprint of an automated attack.
 4. **Most-targeted usernames** — attackers love trying `root`, `admin`, and service accounts like `oracle` or `postgres`. If those top the list, someone's guessing.
 5. **Watchlist** — any IP with 5+ failed attempts gets flagged for a human to investigate. The script is careful to frame this as *triage, not proof*: a locked-out coworker with a typo'd password lands on the same list as an attacker. The human decides.
+6. **Success-after-failures alerts (new)** — a login that follows 3+ failed attempts from the same IP for the same username, flagged urgently: this is the pattern a guessed password leaves behind.
 
 ## How the code works, line by line (simple terms)
 
@@ -39,6 +50,9 @@ Given an auth log file, it prints a summary report with five sections:
 
 ```bash
 python3 auth_log_parser.py sample_auth.log
+python3 auth_log_parser.py --demo              # built-in demo, no file needed
+python3 auth_log_parser.py --threshold 3 --top 3 sample_auth.log
+python3 auth_log_parser.py --json sample_auth.log
 ```
 
 No libraries to install — everything used comes with Python. Point it at your own log file by passing its path instead.
