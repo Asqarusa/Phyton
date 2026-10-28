@@ -5,6 +5,19 @@
 
 ---
 
+## What's new in this version (improved 2026-10-27)
+
+I went back to this project and gave it four upgrades, all in the same single file:
+
+1. **It now speaks IPv6 too.** The original only handled IPv4. Give it `2001:db8::1/64` and you get the same breakdown — with the honest note that IPv6 has no broadcast address (it uses multicast instead) and that old A/B/C classes don't apply.
+2. **Two sizing helpers engineers actually use.** `--split 4` carves a network into 4 equal smaller subnets (that's VLSM in one step: a /24 becomes four /26s of 62 hosts each). `--hosts 50` answers the reverse question: "what's the smallest subnet that fits 50 devices?" (a /26, in that case).
+3. **Proper command-line flags.** `--demo` runs four worked examples (home, corporate, tiny link, IPv6) without typing anything, and `--json` prints the same breakdown as JSON so another tool can read it.
+4. **Friendlier mistakes.** Forgetting the `/24` used to be a confusing edge case; now you get a plain hint ("add CIDR notation, e.g. 192.168.1.10/24") and a pointer to `--demo`, and bad prefixes or out-of-range numbers get the same treatment instead of a traceback.
+
+Think of it like this: the original calculator was a ruler. The improved one is a ruler plus a "cut this board into 4 equal pieces" guide and a "what size board do I need for 50 shelves?" answer — same tool, now useful for planning, not just measuring.
+
+---
+
 ## The big idea (non-tech analogy first)
 
 Imagine an apartment building. The **building address** (123 Main St) tells the
@@ -102,6 +115,11 @@ and explained in plain language.
 python3 subnet_calculator.py 192.168.1.10/24   # typical home network
 python3 subnet_calculator.py 10.0.5.23/16      # bigger corporate-style network
 python3 subnet_calculator.py 172.16.0.1/30     # tiny 2-device link (like a router-to-router cable)
+python3 subnet_calculator.py 2001:db8::1/64    # IPv6 example (new)
+python3 subnet_calculator.py --demo             # four worked examples, no typing
+python3 subnet_calculator.py 192.168.1.0/24 --split 4   # carve into four /26 subnets (new)
+python3 subnet_calculator.py 10.0.0.0/24 --hosts 50     # smallest subnet fitting 50 hosts: /26 (new)
+python3 subnet_calculator.py 192.168.1.10/24 --json    # same breakdown as JSON (new)
 python3 subnet_calculator.py                   # no argument? runs the home example
 ```
 
