@@ -15,6 +15,34 @@ suspicious file, they don't open it — they compute its hash and look that fing
 up in a threat-intelligence database. If it matches a known-malware entry, they know
 instantly what they're dealing with.
 
+## What's new in this version (improved 2026-10-31)
+
+Think of it like upgrading a fingerprint kit: it still identifies prints the same
+way, but now it recognizes more print types, admits honestly when two prints look
+alike, and can check a whole stack of evidence at once.
+
+- **More hash types recognized** — SHA-224 (56 characters) and SHA-384 (96
+  characters) join MD5, SHA-1, SHA-256, SHA-512, and bcrypt.
+- **Ambiguity is now honest** — a 64-character hash is reported as "SHA-256 (or
+  SHA3-256)" with a note on how analysts tell them apart, instead of silently
+  picking one. Same for 128 characters (SHA-512 or SHA3-512) and 32 characters
+  (MD5 or Windows NTLM — context decides).
+- **Batch mode (`--batch`)** — point it at a file with one hash per line and get
+  a summary table: how many of each type, how many unrecognized. Like triaging
+  a whole alert queue instead of one alert at a time.
+- **Hash a word directly (`--text`)** — `python3 hash_identifier.py --text hello`
+  prints every fingerprint of a word. Perfect for the avalanche demo: `hello`
+  vs `hallo` differ by one letter and produce totally different hashes.
+- **Command-line flags (`--identify`, `--file`, `--json`, `--demo`)** — no more
+  typing into prompts for one-off checks, and `--json` gives machine-readable
+  output for SOC pipelines. The old `identify` and `hash <file>` commands still
+  work exactly as before.
+- **File mode now includes SHA-512** and shows the file size; missing files,
+  folders, and unreadable files each get a plain-English error and exit code 2
+  instead of a crash.
+- **New demo part** — the avalanche effect up close: `hello` vs `hallo`,
+  side by side, so you can see one changed letter flip half the fingerprint.
+
 ## What the script does
 
 `hash_identifier.py` has two jobs:
@@ -70,6 +98,10 @@ Run it with no arguments for a guided demo that shows both.
 python3 hash_identifier.py                  # guided demo
 python3 hash_identifier.py identify         # paste your own hashes to identify
 python3 hash_identifier.py hash myfile.txt  # fingerprint one of YOUR files
+python3 hash_identifier.py --identify 5d41402abc4b2a76b9719d911017c592  # one hash, no prompts
+python3 hash_identifier.py --file myfile.txt --json  # fingerprints as JSON
+python3 hash_identifier.py --text hello      # hash a word with every algorithm
+python3 hash_identifier.py --batch hashes.txt  # identify many hashes, summary table
 ```
 
 Try the avalanche effect yourself: open `sample_file.txt`, change one letter,
