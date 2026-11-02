@@ -2,6 +2,33 @@
 
 *Day 10 of my daily security projects — networking theme. Code: `ping_sweep.py`*
 
+## What's new in this version (improved, November 2026)
+
+Think of it like this: the first version of this tool was a clipboard and a
+knock on every door — it told you who answered, once. The improved version
+is a clipboard **plus a guest list**: it remembers who was home last time and
+tells you what changed.
+
+- **Save & compare (`--save` / `--compare`).** Run a sweep once with
+  `--save baseline.json`, then run it again later with
+  `--compare baseline.json`. It flags **NEW** devices that appeared and
+  **GONE** devices that stopped answering. A device you don't recognize
+  showing up on your home Wi-Fi is exactly the kind of thing a SOC analyst
+  investigates — now the script spots it for you.
+- **Proper command-line flags.** The old version read one rough argument;
+  now `--network`, `--timeout`, `--workers`, `--json`, `--no-reverse` and
+  `--quiet` all work with a built-in `--help` screen, so you can see every
+  option without reading the code.
+- **Response-time stats.** The summary now shows the fastest, slowest and
+  average reply time, so you can tell at a glance whether the network is
+  healthy or sluggish.
+- **Friendlier errors.** Bad input (a public address, a typo, a range that's
+  too big, a missing baseline file) now exits with code 2 and a plain-English
+  explanation instead of a crash. If the `ping` program itself is missing,
+  the script says so instead of failing silently on every host.
+- **Machine-readable output (`--json`).** Pipe the results into other tools
+  or a spreadsheet instead of copying them by hand.
+
 ## The big idea (non-tech analogy first)
 
 Imagine you just moved into an apartment building and want to know which units
@@ -92,6 +119,16 @@ python3 ping_sweep.py
 
 # Your home network (example — use YOUR router's range, check your Wi-Fi settings)
 python3 ping_sweep.py 192.168.1.0/24
+
+# Machine-readable output, for piping into other tools
+python3 ping_sweep.py 192.168.1.0/24 --json
+
+# Save a baseline, then compare later to spot new or vanished devices
+python3 ping_sweep.py 192.168.1.0/24 --save baseline.json
+python3 ping_sweep.py 192.168.1.0/24 --compare baseline.json
+
+# See every option
+python3 ping_sweep.py --help
 ```
 
 What you'll see on a home network: your router, your phone, your laptop,
