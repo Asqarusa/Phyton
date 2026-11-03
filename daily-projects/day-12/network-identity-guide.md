@@ -4,6 +4,17 @@
 
 ---
 
+## What's new in this version (2026-11-02)
+
+The tool went back to school and learned a few new tricks:
+
+- **It now sees IPv6 too.** The first version only knew IPv4 (the `192.168.x.x` style). Most home networks now hand out IPv6 addresses as well, and a SOC analyst who can't recognize their own IPv6 address will trip over it in a log. The card now shows both.
+- **It lists *every* address on the machine, not just one.** Wi-Fi, Ethernet, loopback — each gets a label (private, public, loopback, link-local, and more). Think of it as the difference between knowing your own apartment number and knowing *every* door in the building that belongs to you.
+- **`--check` classifies any IP you paste in.** Give it an address from a log — say `8.8.8.8` or `100.64.0.5` — and it tells you what kind it is plus a one-line SOC hint. Great for practicing log triage without touching a real network.
+- **`--json` prints the whole card as JSON**, so the output can feed another script or a spreadsheet.
+- **`--demo` runs fully offline** with safe example addresses, and **`--no-public`** skips the public-IP lookup when you want to stay local.
+- **Friendlier errors.** A mistyped IP or a bad flag now gets a plain-English message and exits with code 2, instead of a scary traceback. The public-IP reply is also checked to make sure it really looks like an IP.
+
 ## The big idea (the non-tech analogy first)
 
 Think of your home network like an apartment building:
@@ -30,7 +41,11 @@ Then it prints a short explainer: whether your local IP is private, and the SOC 
 
 **`get_hostname()`** — One line: ask the OS "what am I called?" Every computer has a name; this just reads it.
 
-**`get_local_ip()`** — The sneaky-clever part. It opens a UDP "connection" to `8.8.8.8` (Google's DNS). Here's the trick: *UDP `connect()` doesn't send anything.* It just asks the OS, "if I *were* to send something there, which local address would you use?" The OS picks a route and tells us — and that address is our local IP. No packets leave the machine. We close the socket right after.
+**`get_local_ip()`** — The sneaky-clever part. It opens a UDP "connection" to `8.8.8.8` (Google's DNS). Here's the trick: *UDP `connect()` doesn't send anything.* It just asks the OS, "if I *were* to send something there, which local address would you use?" The OS picks a route and tells us — and that address is our local IP. No packets leave the machine. We close the socket right after. It now takes a `version` argument: version 6 does the same trick against Google's IPv6 DNS to find your IPv6 address.
+
+**`get_all_local_ips()`** — Asks the OS for every address tied to your computer's name (Wi-Fi, Ethernet, loopback), using `socket.getaddrinfo()`. Duplicates are removed. This is how the card can list all your addresses instead of just the one used for the internet.
+
+**`classify()`** — The new "what kind of IP is this?" brain. It uses Python's `ipaddress` module, which already knows every special range, and returns a label (private, public, loopback, link-local, CGNAT, multicast, documentation…) plus a one-line SOC hint. No hand-rolled octet math anymore — the original `is_private()` did that by hand, and this version keeps it only for backwards compatibility.
 
 **`get_mac()`** — `uuid.getnode()` returns the network card's hardware address as one big number. The line with `>>` and `& 0xFF` is just slicing that number into six pairs of digits and gluing them with colons. Bit-shifting sounds scary; all it does is "cut the number into byte-sized pieces."
 
@@ -55,7 +70,12 @@ Then it prints a short explainer: whether your local IP is private, and the SOC 
 ## How to run it
 
 ```bash
-python3 network_identity.py
+python3 network_identity.py               # the ID card
+python3 network_identity.py --demo        # sample data, fully offline
+python3 network_identity.py --json        # the same card, as JSON
+python3 network_identity.py --no-public   # skip the public-IP lookup
+python3 network_identity.py --check 8.8.8.8   # classify any IP
+python3 network_identity.py --help        # all options
 ```
 
 No libraries to install — it uses only Python's standard library. Works on Windows, macOS, and Linux.
