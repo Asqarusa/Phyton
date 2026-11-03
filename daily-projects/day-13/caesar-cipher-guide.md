@@ -3,6 +3,29 @@
 **Day 13 — SOC analysis theme**
 Code: `caesar_cipher.py` — run it with `python3 caesar_cipher.py`
 
+## What's new in this version (2026-11-03)
+
+I went back to this project and gave it a proper upgrade — think of it like
+trading a pocket calculator for a full toolbox:
+
+- **It keeps your capital letters now.** The old version shouted everything
+  in ALL CAPS. "Attack at dawn" used to come out as "DWWDFN DW GDZQ"; now it
+  comes out as "Dwwdfn dw gdzq", exactly matching how you typed it.
+- **A smarter code-breaker.** The old breaker only recognised a handful of
+  common words, so short messages like "Hello world" stumped it. The new one
+  also checks each guess against the *fingerprint* of English — how often
+  each letter normally appears (E is common, Z is rare) — so it now cracks
+  short messages too. Try `--break` on "Khoor zruog" and watch it find
+  "Hello world".
+- **A real command line.** No more memorising positional arguments:
+  `--encrypt`, `--decrypt`, `--break`, `--shift`, `--text`, `--file`, and
+  `--json` are all proper flags with `--help` to explain them.
+- **Whole files, and machine-readable output.** Point it at a text file with
+  `--file`, or add `--json` to get results another tool can read.
+- **Friendlier mistakes.** A bad shift, a missing file, or empty input now
+  explains the problem in plain English and exits cleanly instead of
+  crashing with a traceback.
+
 ## The big idea
 
 Imagine you and a friend agree that every letter of the alphabet gets replaced
@@ -23,30 +46,35 @@ attackers hide things — and why weak "encryption" is no protection at all.
 
 Three things, all in one file:
 
-1. **Encrypt / decrypt** — shift any message by any key (1–25).
+1. **Encrypt / decrypt** — shift any message by any key (1–25), keeping
+   upper- and lowercase as you typed them.
 2. **Brute-force breaker** — given only ciphertext, try all 25 possible keys
-   and show every candidate.
+   and show every candidate, best first.
 3. **Auto-detection** — score each candidate on "does this look like English?"
-   using a tiny list of common English words, and highlight the best guess.
+   using *two* signals: a list of common English words, and a comparison of
+   the candidate's letter frequencies against normal English (a chi-squared
+   test — the same "fingerprint" idea, just with numbers).
 
 ## How the code works (line by line, in plain terms)
 
 - `shift_letter(char, shift)` — takes one letter, finds its position in the
   alphabet (A=0, B=1, … Z=25), adds the shift, and uses `% 26` (the remainder
-  operator) to wrap around past Z. Letters shift; spaces and punctuation pass
-  through untouched.
+  operator) to wrap around past Z. Uppercase stays uppercase, lowercase stays
+  lowercase; spaces and punctuation pass through untouched.
 - `caesar(text, shift)` — runs `shift_letter` on every character and glues the
   results back together. A positive shift encrypts; a negative shift (or
   `26 − shift`) decrypts.
-- `score_english(text)` — splits the candidate into words and counts how many
-  are on a small list of common English words (THE, AND, ATTACK, SERVER…).
-  The correct key makes real words appear, so it scores highest. This is the
-  "frequency analysis" idea: languages have fingerprints.
-- `break_caesar(ciphertext)` — loops key 1 through 25, decrypts with each, and
-  prints all 25 guesses. There are only 25 keys — a computer checks every one
-  in milliseconds.
-- `demo()` — runs with no arguments: encrypts "ATTACK AT DAWN" with key 3,
-  decrypts it back, then cracks it from ciphertext alone.
+- `score_english(text)` — two signals: a chi-squared comparison of the text's
+  letter counts against normal English frequencies (E ~12.7%, Z ~0.07%),
+  minus a bonus for every common English word found. The correct key makes
+  real words appear *and* matches English's letter fingerprint, so it scores
+  lowest. This is the "frequency analysis" idea: languages have fingerprints.
+- `break_caesar(ciphertext)` — loops key 1 through 25, decrypts with each,
+  scores them, and returns every candidate sorted best first. There are only
+  25 keys — a computer checks every one in milliseconds.
+- `demo()` — runs with no arguments: encrypts "Attack at dawn" with key 3,
+  decrypts it back, cracks it from ciphertext alone, then shows a second
+  example with ROT13 (key 13, the classic "spoiler tag" cipher).
 
 ## Key terms translated
 
@@ -62,10 +90,13 @@ Three things, all in one file:
 ## How to run it
 
 ```bash
-python3 caesar_cipher.py                       # built-in demo
-python3 caesar_cipher.py encrypt "MEET AT NOON" 5
-python3 caesar_cipher.py decrypt "RJJY FY STTS" 5
-python3 caesar_cipher.py break "DWWDFN DW GDZQ"
+python3 caesar_cipher.py                                  # built-in demo
+python3 caesar_cipher.py --encrypt --text "Meet at noon" --shift 5
+python3 caesar_cipher.py --decrypt --text "Rjjy fy stts" --shift 5
+python3 caesar_cipher.py --break --text "Dwwdfn dw gdzq"
+python3 caesar_cipher.py --break --text "Khoor zruog" --json
+python3 caesar_cipher.py --encrypt --file note.txt --shift 13
+python3 caesar_cipher.py --help                           # all the options
 ```
 
 No libraries to install — pure Python standard library, fully offline.
