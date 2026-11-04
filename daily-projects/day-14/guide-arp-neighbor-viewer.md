@@ -1,5 +1,16 @@
 # Day 14 — Who Is on My Local Network? (ARP Neighbor Viewer)
 
+## What's new in this version (2026-11-03)
+
+Think of the original script like a photo of the office lobby — it showed you who was there right now. This version adds a security guard's memory and instincts:
+
+- **Spoofing alarm:** it now notices when two different name badges claim the same seat number (one IP, two MACs) — the classic sign someone is impersonating another device — and when one name badge claims several seat numbers. It prints a clear warning and exits with code 1 so automated checks can catch it.
+- **Before-and-after snapshots:** `--save` stores today's device list, and `--compare` checks a later run against it, flagging devices as NEW, GONE, or CHANGED — like comparing today's lobby photo with yesterday's.
+- **Real command-line flags:** `--demo`, `--json` (machine-readable output), `--unknown-only` (show only devices we couldn't identify), and `--quiet` (just the table, no explanations). Run `--help` to see them all.
+- **More makers recognized:** the built-in vendor table grew from 24 to 57 entries (Cisco, TP-Link, Netgear, Dell, HP, Intel, Huawei, Xiaomi, Sonos, and more), so fewer devices show up as "Unknown vendor."
+- **A small bug fixed:** addresses now sort numerically, so 192.168.1.2 correctly appears before 192.168.1.10 (before, plain text sorting put .10 first).
+- **Friendlier errors:** bad files and bad flags now explain the problem and exit with code 2 instead of crashing.
+
 ## The big idea (plain English first)
 
 Imagine an office building. Every employee has two identifiers:
@@ -20,7 +31,11 @@ Today's script simply *reads* that address book and shows it to you. It doesn't 
 
 ## How the code works, in simple terms
 
-- **`OUI_VENDORS`** — a small dictionary mapping manufacturer codes (like `B8:27:EB`, which belongs to Raspberry Pi) to friendly names. The real OUI list has thousands of entries; this is a demo subset.
+- **`OUI_VENDORS`** — a small dictionary mapping manufacturer codes (like `B8:27:EB`, which belongs to Raspberry Pi) to friendly names. The real OUI list has thousands of entries; this is a demo subset. This version grew it from 24 to 57 entries.
+- **`detect_spoofing()`** — the new alarm: it builds two maps (IP → MACs and MAC → IPs) and warns when one IP has two or more MACs, or one MAC has two or more IPs. It returns a list of warning strings; an empty list means the table looks clean.
+- **`ip_sort_key()`** — turns `192.168.1.10` into the tuple `(192, 168, 1, 10)` so sorting is numeric, not alphabetical (alphabetical sorting wrongly puts `.10` before `.2`).
+- **`load_baseline()` / `save_baseline()`** — `--save` writes the current device list as JSON (`{"entries": {"IP": "MAC", ...}}`); `--compare` loads it back, validates it (valid JSON, right shape, real IPs and MACs), and reports NEW / GONE / CHANGED devices. Bad files get a friendly error and exit code 2.
+- **`build_parser()`** — defines all command-line flags with `argparse`, so `--help` prints a proper usage page and typos like `--badopt` get a clear error instead of being silently ignored.
 - **`is_private_ip()`** — checks whether an address is a private, home/office-style address (10.x.x.x, 192.168.x.x, 172.16–31.x.x) or loopback. Public addresses get flagged "NOT PRIVATE!".
 - **`read_proc_net_arp()`** — on Linux, the operating system exposes the ARP table as a plain text file at `/proc/net/arp`. This function reads it and picks out IP + MAC pairs, skipping incomplete entries (`00:00:00:...` means "we asked, nobody answered").
 - **`read_arp_command()`** — a fallback for macOS and other systems: runs the `arp -a` command and parses its output with a regular expression.
@@ -43,7 +58,14 @@ Today's script simply *reads* that address book and shows it to you. It doesn't 
 ```bash
 python3 arp_neighbor_viewer.py           # read your real ARP table
 python3 arp_neighbor_viewer.py --demo   # see sample output anywhere
+python3 arp_neighbor_viewer.py --demo --json          # machine-readable output
+python3 arp_neighbor_viewer.py --save baseline.json  # snapshot today's devices
+python3 arp_neighbor_viewer.py --compare baseline.json  # spot NEW / GONE / CHANGED
+python3 arp_neighbor_viewer.py --unknown-only        # only unidentified devices
+python3 arp_neighbor_viewer.py --help                # list every flag
 ```
+
+Exit codes: `0` means the table looks clean, `1` means a spoofing warning was found, `2` means bad input (bad flag or unreadable baseline file).
 
 You need nothing installed beyond Python 3 — no libraries, no admin rights, no network access. It is read-only: it sends zero packets and talks to zero devices.
 
