@@ -1,1 +1,408 @@
-IyEvdXNyL2Jpbi9lbnYgcHl0aG9uMwoiIiIKRGF5IDE2IOKAlCBMaXN0ZW5pbmcgU2VydmljZSBJbnZlbnRvcnkgKG5ldHdvcmtpbmcsIGRlZmVuc2l2ZS1vbmx5KQoKQmlnIGlkZWE6IGV2ZXJ5IG9wZW4gImRvb3IiIG9uIHlvdXIgbGFwdG9wIGlzIGEgY2hhbmNlIGZvciBhbiBhdHRhY2tlci4KVGhpcyBzY3JpcHQgdGFrZXMgc3RvY2sgb2YgZXZlcnkgVENQIHBvcnQgeW91ciBPV04gbWFjaGluZSBpcyBsaXN0ZW5pbmcgb24sCm5hbWVzIHRoZSBzZXJ2aWNlIGJlaGluZCB0aGUgY29tbW9uIG9uZXMsIGFuZCBmbGFncyBhbnl0aGluZyBzdXJwcmlzaW5nLgpOb3RoaW5nIGxlYXZlcyB5b3VyIGxhcHRvcDogaXQgb25seSByZWFkcyB5b3VyIG93biBtYWNoaW5lJ3Mgc29ja2V0IHRhYmxlLgoKVXNhZ2U6CiAgICBweXRob24zIGxpc3RlbmVyX2ludmVudG9yeS5weSAgICAgICAgICAjIGludmVudG9yeSBvZiB0aGlzIG1hY2hpbmUKICAgIHB5dGhvbjMgbGlzdGVuZXJfaW52ZW50b3J5LnB5IC0tZGVtbyAgICMgc2FtZSByZXBvcnQgb24gc2FtcGxlIGRhdGEKICAgIHB5dGhvbjMgbGlzdGVuZXJfaW52ZW50b3J5LnB5IC0tdmVyYm9zZSMgYWxzbyBzaG93IHRoZSBvd25pbmcgcHJvY2VzcyAoTGludXgpCgpTYWZlIGJ5IGRlZmF1bHQ6IHJlYWQtb25seS4gTm8gY29ubmVjdGlvbnMgdG8gYW55b25lIGVsc2UncyBtYWNoaW5lLApubyBwb3J0IHNjYW5uaW5nIG9mIHJlbW90ZSBob3N0cywgbm8gY2hhbmdlcyB0byB0aGUgc3lzdGVtLgoiIiIKCmltcG9ydCBhcmdwYXJzZQppbXBvcnQgb3MKaW1wb3J0IHNvY2tldAoKIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBLbm93biBzZXJ2aWNlczogd2hhdCBhIGxpc3RlbmVyIG9uIGEgY29tbW9uIHBvcnQgdXN1YWxseSBtZWFucy4KIyAnbm90ZScgaXMgYSBwbGFpbi1FbmdsaXNoIGV4cGxhbmF0aW9uIGZvciBhIGJlZ2lubmVyOyAncmlzaycgZmxhZ3MKIyBzZXJ2aWNlcyB0aGF0IGNvbW1vbmx5IGFwcGVhciBpbiBhdHRhY2tlciB0b29saW5nIG9yIGRlZmF1bHQgaW5zdGFsbHMuCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCktOT1dOX1NFUlZJQ0VTID0gewogICAgMjE6ICAgKCJGVFAiLCAgICAgICAgICAgICJvbGQgZmlsZS10cmFuc2ZlciBwcm90b2NvbCAoc2VuZHMgcGFzc3dvcmRzIGluIHBsYWluIHRleHQpIiwgVHJ1ZSksCiAgICAyMjogICAoIlNTSCIsICAgICAgICAgICAgInNlY3VyZSByZW1vdGUgc2hlbGw7IG5vcm1hbCBvbiBkZXYgbWFjaGluZXMvc2VydmVycyIsIEZhbHNlKSwKICAgIDIzOiAgICgiVGVsbmV0IiwgICAgICAgICAiYW5jaWVudCByZW1vdGUgc2hlbGwgd2l0aCBOTyBlbmNyeXB0aW9uIOKAlCByaXNreSBpZiBvcGVuIiwgVHJ1ZSksCiAgICAyNTogICAoIlNNVFAiLCAgICAgICAgICAgIm1haWwgcmVsYXk7IHNwYW1tZXJzIGxvdmUgb3BlbiBtYWlsIHNlcnZlcnMiLCBUcnVlKSwKICAgIDUzOiAgICgiRE5TIiwgICAgICAgICAgICAiZG9tYWluLW5hbWUgbG9va3VwczsgZXhwZWN0ZWQgb24gcm91dGVycy9WUE4gdG9vbHMiLCBGYWxzZSksCiAgICA4MDogICAoIkhUVFAiLCAgICAgICAgICAgInVuZW5jcnlwdGVkIHdlYiB0cmFmZmljOyBub3JtYWwgZm9yIGxvY2FsIGRldiBzZXJ2ZXJzIiwgRmFsc2UpLAogICAgMTM5OiAgKCJTTUIvTmV0QklPUyIsICAgICJXaW5kb3dzIGZpbGUgc2hhcmluZzsgd29ybXMgaGF2ZSBhYnVzZWQgaXQgZm9yIHllYXJzIiwgVHJ1ZSksCiAgICAxNDM6ICAoIklNQVAiLCAgICAgICAgICAgImVtYWlsIGluYm94IGFjY2VzcyIsIEZhbHNlKSwKICAgIDQ0MzogICgiSFRUUFMiLCAgICAgICAgICAiZW5jcnlwdGVkIHdlYiB0cmFmZmljOyBub3JtYWwiLCBGYWxzZSksCiAgICA0NDU6ICAoIlNNQiIsICAgICAgICAgICAgIldpbmRvd3MgZmlsZSBzaGFyaW5nIChXYW5uYUNyeSB1c2VkIHRoaXMgcG9ydCkiLCBUcnVlKSwKICAgIDMzMDY6ICgiTXlTUUwiLCAgICAgICAgICAiZGF0YWJhc2Ugc2VydmVyOyBzaG91bGQgb25seSBsaXN0ZW4gb24gbG9jYWxob3N0IiwgRmFsc2UpLAogICAgMzM4OTogKCJSRFAiLCAgICAgICAgICAgICJXaW5kb3dzIFJlbW90ZSBEZXNrdG9wOyBhdHRhY2tlcnMgYnJ1dGUtZm9yY2UgaXQiLCBUcnVlKSwKICAgIDU0MzI6ICgiUG9zdGdyZVNRTCIsICAgICAiZGF0YWJhc2Ugc2VydmVyOyBzaG91bGQgb25seSBsaXN0ZW4gb24gbG9jYWxob3N0IiwgRmFsc2UpLAogICAgNTkwMDogKCJWTkMiLCAgICAgICAgICAgICJyZW1vdGUgc2NyZWVuIHNoYXJpbmc7IGZpbmUgb24gYSBMQU4sIHNjYXJ5IG9uIHRoZSBpbnRlcm5ldCIsIFRydWUpLAogICAgNjM3OTogKCJSZWRpcyIsICAgICAgICAgICJpbi1tZW1vcnkgZGF0YWJhc2U7IHNoaXAgaXQgd2l0aCBhIHBhc3N3b3JkIG9yIGJpbmQgdG8gbG9jYWxob3N0IiwgVHJ1ZSksCiAgICA4MDgwOiAoIkhUVFAtYWx0IiwgICAgICAgIndlYiBzZXJ2ZXJzIGFuZCBwcm94aWVzIG9mdGVuIGxpdmUgaGVyZTsgY29tbW9uIGluIGRldiIsIEZhbHNlKSwKICAgIDg0NDM6ICgiSFRUUFMtYWx0IiwgICAgICAiZW5jcnlwdGVkIHdlYiB0cmFmZmljIG9uIGFuIGFsdGVybmF0ZSBwb3J0IiwgRmFsc2UpLAogICAgMjcwMTc6KCJNb25nb0RCIiwgICAgICAgICJkYXRhYmFzZSBzZXJ2ZXI7IHNob3VsZCBvbmx5IGxpc3RlbiBvbiBsb2NhbGhvc3QiLCBUcnVlKSwKICAgIDMwMDA6ICgiRGV2IHNlcnZlciIsICAgICAiTm9kZS9SZWFjdC9OZXh0LmpzIGRldiBzZXJ2ZXJzIGRlZmF1bHQgdG8gdGhpcyIsIEZhbHNlKSwKICAgIDUwMDA6ICgiRGV2IHNlcnZlciIsICAgICAiRmxhc2sgYW5kIG90aGVyIGZyYW1ld29ya3MgZGVmYXVsdCB0byB0aGlzIiwgRmFsc2UpLAogICAgODAwMDogKCJEZXYgc2VydmVyIiwgICAgICJEamFuZ28gYW5kIFB5dGhvbiBkZXYgc2VydmVycyBkZWZhdWx0IHRvIHRoaXMiLCBGYWxzZSksCn0KCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgU2FtcGxlIGRhdGEgZm9yIC0tZGVtbzogdGhyZWUgbGluZXMgZXhhY3RseSBsaWtlIExpbnV4IC9wcm9jL25ldC90Y3Agcm93cy4KIyBGaWVsZHM6IHNsLCBsb2NhbF9hZGRyZXNzKGhleCBpcDpoZXggcG9ydCksIHJlbV9hZGRyZXNzLCBzdCwgLi4uIAojIHN0ID09IDBBIG1lYW5zIHRoZSBzb2NrZXQgaXMgTElTVEVOSU5HLgojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpTQU1QTEVfUFJPQ19MSU5FUyA9IFsKICAgICIgIHNsICBsb2NhbF9hZGRyZXNzIHJlbV9hZGRyZXNzICAgc3QgdHhfcXVldWUgcnhfcXVldWUgdHIgdG0tPndoZW4gcmV0cm5zbXQgICB1aWQgIHRpbWVvdXQgaW5vZGUiLAogICAgIiAgIDA6IDAxMDAwMDdGOjFGNDAgMDAwMDAwMDA6MDAwMCAwQSAwMDAwMDAwMDowMDAwMDAwMCAwMDowMDAwMDAwMCAwMDAwMDAwMCAgMTAwMCAgICAgICAgMCAxMjM0NSAxIDAwMDAwMDAwMDAwMDAwMDAgMTAwIDAgMCAxMCAwIiwKICAgICIgICAxOiAwMTAwMDA3RjowMUJCIDAwMDAwMDAwOjAwMDAgMEEgMDAwMDAwMDA6MDAwMDAwMDAgMDA6MDAwMDAwMDAgMDAwMDAwMDAgIDEwMDAgICAgICAgIDAgMTIzNDYgMSAwMDAwMDAwMDAwMDAwMDAwIDEwMCAwIDAgMTAgMCIsCiAgICAiICAgMjogMDEwMDAwN0Y6MEI1NCAwMDAwMDAwMDowMDAwIDBBIDAwMDAwMDAwOjAwMDAgMEEgMDAwMDAwMDA6MDAwMDAwMDAgMDA6MDAwMDAwMDAgMDAwMDAwMDAgIDEwMDAgICAgICAgIDAgMTIzNDcgMSAwMDAwMDAwMDAwMDAwMDAwIDEwMCAwIDAgMTAgMCIsCiAgICAjIDAxMDAwMDdGID0gMTI3LjAuMC4xIChoZXgsIHJldmVyc2VkKSwgMUY0MCA9IDgwMDAsIDAxQkIgPSA0NDMsIDBCNTQgPSAyOTAwCl0KCgpkZWYgaGV4X3BvcnRfdG9faW50KGhleF9wb3J0KToKICAgICIiIkNvbnZlcnQgYSBoZXggcG9ydCBzdHJpbmcgbGlrZSAnMUY0MCcgaW50byB0aGUgbnVtYmVyIDgwMDAuIiIiCiAgICByZXR1cm4gaW50KGhleF9wb3J0LCAxNikKCgpkZWYgaGV4X2lwX3RvX3N0cihoZXhfaXApOgogICAgIiIiQ29udmVydCByZXZlcnNlZCBoZXggSVB2NCBsaWtlICcwMTAwMDA3RicgaW50byAnMTI3LjAuMC4xJy4iIiIKICAgICMgRWFjaCBieXRlIGlzIHdyaXR0ZW4gbGl0dGxlLWVuZGlhbiBpbiAvcHJvYy9uZXQvdGNwCiAgICByYXcgPSBieXRlcy5mcm9taGV4KGhleF9pcCkKICAgIHJldHVybiAiLiIuam9pbihzdHIoYikgZm9yIGIgaW4gcmV2ZXJzZWQocmF3KSkKCgpkZWYgcGFyc2VfcHJvY19uZXRfdGNwKGxpbmVzKToKICAgICIiIgogICAgUmVhZCAvcHJvYy9uZXQvdGNwLXN0eWxlIGxpbmVzIGFuZCByZXR1cm4gWyhhZGRyZXNzLCBwb3J0KSwgLi4uXQogICAgZm9yIGV2ZXJ5IHNvY2tldCBpbiBMSVNURU4gc3RhdGUgKHN0ID09ICcwQScpIG9uIHRoaXMgbWFjaGluZS4KICAgICIiIgogICAgbGlzdGVuZXJzID0gW10KICAgIGZvciBsaW5lIGluIGxpbmVzWzE6XTogICMgZmlyc3QgbGluZSBpcyB0aGUgaGVhZGVyIHJvdwogICAgICAgIHBhcnRzID0gbGluZS5zcGxpdCgpCiAgICAgICAgaWYgbGVuKHBhcnRzKSA8IDQ6CiAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgbG9jYWxfYWRkcmVzcywgc3RhdGUgPSBwYXJ0c1sxXSwgcGFydHNbM10KICAgICAgICBpZiBzdGF0ZSAhPSAiMEEiOiAgIyBvbmx5IGtlZXAgc29ja2V0cyB0aGF0IGFyZSBMSVNURU5JTkcKICAgICAgICAgICAgY29udGludWUKICAgICAgICBoZXhfaXAsIGhleF9wb3J0ID0gbG9jYWxfYWRkcmVzcy5zcGxpdCgiOiIpCiAgICAgICAgbGlzdGVuZXJzLmFwcGVuZCgoaGV4X2lwX3RvX3N0cihoZXhfaXApLCBoZXhfcG9ydF90b19pbnQoaGV4X3BvcnQpKSkKICAgIHJldHVybiBsaXN0ZW5lcnMKCgpkZWYgZmluZF9vd25pbmdfcHJvY2VzcyhsaW51eF9pbm9kZSwgdmVyYm9zZSk6CiAgICAiIiIKICAgIE9uIExpbnV4LCB0aGUgaW5vZGUgY29sdW1uIGxpbmtzIGEgc29ja2V0IHRvIGEgcHJvY2Vzcy4KICAgIFdhbGsgL3Byb2MvPHBpZD4vZmQgbG9va2luZyBmb3IgJ3NvY2tldDpbaW5vZGVdJy4gUmVhZC1vbmx5LgogICAgIiIiCiAgICBpZiBub3QgdmVyYm9zZSBvciBsaW51eF9pbm9kZSA9PSAwOgogICAgICAgIHJldHVybiAiPyIKICAgIGZvciBwaWQgaW4gb3MubGlzdGRpcigiL3Byb2MiKToKICAgICAgICBpZiBub3QgcGlkLmlzZGlnaXQoKToKICAgICAgICAgICAgY29udGludWUKICAgICAgICBmZF9kaXIgPSBmIi9wcm9jL3twaWR9L2ZkIgogICAgICAgIHRyeToKICAgICAgICAgICAgZmRzID0gb3MubGlzdGRpcihmZF9kaXIpCiAgICAgICAgZXhjZXB0IChQZXJtaXNzaW9uRXJyb3IsIEZpbGVOb3RGb3VuZEVycm9yKToKICAgICAgICAgICAgY29udGludWUKICAgICAgICBmb3IgZmQgaW4gZmRzOgogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICB0YXJnZXQgPSBvcy5yZWFkbGluayhmIntmZF9kaXJ9L3tmZH0iKQogICAgICAgICAgICBleGNlcHQgT1NFcnJvcjoKICAgICAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgICAgIGlmIHRhcmdldCA9PSBmInNvY2tldDpbe2xpbnV4X2lub2RlfV0iOgogICAgICAgICAgICAgICAgdHJ5OgogICAgICAgICAgICAgICAgICAgIHdpdGggb3BlbihmIi9wcm9jL3twaWR9L2NvbW0iKSBhcyBmOgogICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gZiJ7Zi5yZWFkKCkuc3RyaXAoKX0gKHBpZCB7cGlkfSkiCiAgICAgICAgICAgICAgICBleGNlcHQgT1NFcnJvcjoKICAgICAgICAgICAgICAgICAgICByZXR1cm4gZiJwaWQge3BpZH0iCiAgICByZXR1cm4gIj8iCgoKZGVmIGNvbGxlY3RfbGlzdGVuZXJzKGRlbW8sIHZlcmJvc2UpOgogICAgIiIiCiAgICBUd28gd2F5cyB0byBpbnZlbnRvcnkgdGhpcyBtYWNoaW5lJ3MgbGlzdGVuZXJzOgogICAgICAxLiBMaW51eDogcGFyc2UgL3Byb2MvbmV0L3RjcCBhbmQgL3Byb2MvbmV0L3RjcDYgKHRoZSByZWFsIGRhdGEpLgogICAgICAyLiBBbnl3aGVyZSBlbHNlOiBwcm9iZSBjb21tb24gcG9ydHMgb24gMTI3LjAuMC4xIChsb2NhbGhvc3Qgb25seSkuCiAgICBCb3RoIHN0YXkgb24geW91ciBvd24gbWFjaGluZSDigJQgbm90aGluZyB0b3VjaGVzIHRoZSBuZXR3b3JrLgogICAgIiIiCiAgICBpZiBkZW1vOgogICAgICAgIHJhdyA9IHBhcnNlX3Byb2NfbmV0X3RjcChTQU1QTEVfUFJPQ19MSU5FUykKICAgICAgICByZXR1cm4gWyhpcCwgcG9ydCwgIj8iKSBmb3IgaXAsIHBvcnQgaW4gcmF3XQoKICAgIGxpc3RlbmVycyA9IFtdCiAgICBmb3IgcGF0aCBpbiAoIi9wcm9jL25ldC90Y3AiLCAiL3Byb2MvbmV0L3RjcDYiKToKICAgICAgICB0cnk6CiAgICAgICAgICAgIHdpdGggb3BlbihwYXRoKSBhcyBmOgogICAgICAgICAgICAgICAgbGluZXMgPSBmLnJlYWRsaW5lcygpCiAgICAgICAgZXhjZXB0IEZpbGVOb3RGb3VuZEVycm9yOgogICAgICAgICAgICBjb250aW51ZQogICAgICAgIGZvciBsaW5lIGluIGxpbmVzWzE6XToKICAgICAgICAgICAgcGFydHMgPSBsaW5lLnNwbGl0KCkKICAgICAgICAgICAgaWYgbGVuKHBhcnRzKSA8IDEwIG9yIHBhcnRzWzNdICE9ICIwQSI6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICBoZXhfaXAsIGhleF9wb3J0ID0gcGFydHNbMV0uc3BsaXQoIjoiKQogICAgICAgICAgICBpZiAiOiIgaW4gaGV4X2lwIG9yIGxlbihoZXhfaXApID4gODogICMgc2tpcCBJUHY2IGVudHJpZXMgaGVyZQogICAgICAgICAgICAgICAgY29udGludWUKICAgICAgICAgICAgaW5vZGUgPSBpbnQocGFydHNbOV0pCiAgICAgICAgICAgIGxpc3RlbmVycy5hcHBlbmQoCiAgICAgICAgICAgICAgICAoaGV4X2lwX3RvX3N0cihoZXhfaXApLCBoZXhfcG9ydF90b19pbnQoaGV4X3BvcnQpLAogICAgICAgICAgICAgICAgIGZpbmRfb3duaW5nX3Byb2Nlc3MoaW5vZGUsIHZlcmJvc2UpKQogICAgICAgICAgICApCiAgICAgICAgaWYgbGlzdGVuZXJzOgogICAgICAgICAgICBicmVhayAgIyBnb3QgcmVhbCBkYXRhOyBubyBuZWVkIGZvciB0aGUgZmFsbGJhY2sKCiAgICBpZiBsaXN0ZW5lcnM6CiAgICAgICAgcmV0dXJuIGxpc3RlbmVycwoKICAgICMgRmFsbGJhY2sgZm9yIG1hY09TL1dpbmRvd3M6IGNoZWNrIGNvbW1vbiBwb3J0cyBvbiBsb2NhbGhvc3Qgb25seS4KICAgIHByaW50KCJbaW5mb10gL3Byb2MvbmV0L3RjcCBub3QgZm91bmQg4oCUIHByb2JpbmcgbG9jYWxob3N0IGluc3RlYWQgIgogICAgICAgICAgIigxMjcuMC4wLjEgb25seSwgbm90aGluZyByZW1vdGUpLiIpCiAgICBmb3IgcG9ydCBpbiBzb3J0ZWQoS05PV05fU0VSVklDRVMpOgogICAgICAgIHMgPSBzb2NrZXQuc29ja2V0KHNvY2tldC5BRl9JTkVULCBzb2NrZXQuU09DS19TVFJFQU0pCiAgICAgICAgcy5zZXR0aW1lb3V0KDAuMjUpCiAgICAgICAgaWYgcy5jb25uZWN0X2V4KCgiMTI3LjAuMC4xIiwgcG9ydCkpID09IDA6CiAgICAgICAgICAgIGxpc3RlbmVycy5hcHBlbmQoKCIxMjcuMC4wLjEiLCBwb3J0LCAiPyIpKQogICAgICAgIHMuY2xvc2UoKQogICAgcmV0dXJuIGxpc3RlbmVycwoKCmRlZiBkZXNjcmliZShwb3J0KToKICAgICIiIlJldHVybiAobmFtZSwgbm90ZSwgcmlza3kpIGZvciBhIHBvcnQsIG9yIGEgZ2VuZXJpYyBsYWJlbCBpZiB1bmtub3duLiIiIgogICAgaWYgcG9ydCBpbiBLTk9XTl9TRVJWSUNFUzoKICAgICAgICByZXR1cm4gS05PV05fU0VSVklDRVNbcG9ydF0KICAgIHJldHVybiAoInVua25vd24gc2VydmljZSIsICJubyBjb21tb24gc2VydmljZSByZWdpc3RlcmVkIGhlcmUg4oCUIHdvcnRoIGEgbG9vayIsIFRydWUpCgoKZGVmIG1haW4oKToKICAgIHBhcnNlciA9IGFyZ3BhcnNlLkFyZ3VtZW50UGFyc2VyKAogICAgICAgIGRlc2NyaXB0aW9uPSJJbnZlbnRvcnkgb2YgVENQIGxpc3RlbmVycyBvbiBUSElTIG1hY2hpbmUgKHJlYWQtb25seSkuIikKICAgIHBhcnNlci5hZGRfYXJndW1lbnQoIi0tZGVtbyIsIGFjdGlvbj0ic3RvcmVfdHJ1ZSIsCiAgICAgICAgICAgICAgICAgICAgICAgIGhlbHA9InJ1biBvbiBidWlsdC1pbiBzYW1wbGUgZGF0YSIpCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCItLXZlcmJvc2UiLCBhY3Rpb249InN0b3JlX3RydWUiLAogICAgICAgICAgICAgICAgICAgICAgICBoZWxwPSJhbHNvIHNob3cgdGhlIG93bmluZyBwcm9jZXNzIChMaW51eCBvbmx5KSIpCiAgICBhcmdzID0gcGFyc2VyLnBhcnNlX2FyZ3MoKQoKICAgIGxpc3RlbmVycyA9IGNvbGxlY3RfbGlzdGVuZXJzKGFyZ3MuZGVtbywgYXJncy52ZXJib3NlKQogICAgaWYgbm90IGxpc3RlbmVyczoKICAgICAgICBwcmludCgiTm8gVENQIGxpc3RlbmVycyBmb3VuZCBvbiB0aGlzIG1hY2hpbmUuIE5pY2UgYW5kIHF1aWV0LiIpCiAgICAgICAgcmV0dXJuCgogICAgbGlzdGVuZXJzID0gc29ydGVkKHNldChsaXN0ZW5lcnMpLCBrZXk9bGFtYmRhIHg6IHhbMV0pCiAgICByaXNreV9jb3VudCA9IHVua25vd25fY291bnQgPSAwCgogICAgcHJpbnQoZiJcbnsnUE9SVCc6PDd9eydMSVNURU5JTkcgT04nOjwxNX17J1NFUlZJQ0UnOjwxNn17J09XTkVSJzo8MjJ9Tk9URVMiKQogICAgcHJpbnQoIi0iICogMTEwKQogICAgZm9yIGFkZHJlc3MsIHBvcnQsIG93bmVyIGluIGxpc3RlbmVyczoKICAgICAgICBuYW1lLCBub3RlLCByaXNreSA9IGRlc2NyaWJlKHBvcnQpCiAgICAgICAgaWYgbmFtZSA9PSAidW5rbm93biBzZXJ2aWNlIjoKICAgICAgICAgICAgdW5rbm93bl9jb3VudCArPSAxCiAgICAgICAgaWYgcmlza3k6CiAgICAgICAgICAgIHJpc2t5X2NvdW50ICs9IDEKICAgICAgICBmbGFnID0gIiBbIV0iIGlmIHJpc2t5IGVsc2UgIiIKICAgICAgICBwcmludChmIntwb3J0Ojw3fXthZGRyZXNzOjwxNX17bmFtZTo8MTZ9e293bmVyOjwyMn17bm90ZX17ZmxhZ30iKQoKICAgIHByaW50KCItIiAqIDExMCkKICAgIHByaW50KGYiVG90YWwgbGlzdGVuaW5nIHBvcnRzOiB7bGVuKGxpc3RlbmVycyl9IikKICAgIHByaW50KGYiRmxhZ2dlZCBhcyByaXNreS91bmtub3duOiB7cmlza3lfY291bnR9IikKICAgIHByaW50KCJcblNPQyB0YWtlYXdheTogeW91ciBhdHRhY2sgc3VyZmFjZSBpcyB0aGUgc3VtIG9mIHRoZXNlIGRvb3JzLiAiCiAgICAgICAgICAiQSBsaXN0ZW5lciB5b3UgY2FuJ3QgZXhwbGFpbiBpcyB5b3VyIGZpcnN0IGxlYWQg4oCUXG4iCiAgICAgICAgICAiZmlndXJlIG91dCB3aGF0IGl0IGlzLCB0aGVuIGRlY2lkZSB3aGV0aGVyIGl0IHNob3VsZCBiZSBsaXN0ZW5pbmcgYXQgYWxsLiIpCgoKaWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjoKICAgIG1haW4oKQo=
+#!/usr/bin/env python3
+"""
+Day 16 — Listening Service Inventory (networking, defensive-only)
+IMPROVED version (2026-11-06): UDP listeners, real IPv6 support, exposure
+flags, --json, --save/--compare baseline, --risky-only and --port filters.
+
+Big idea: every open "door" on your laptop is a chance for an attacker.
+This script takes stock of every TCP and UDP port your OWN machine is
+listening on, names the service behind the common ones, and flags anything
+surprising. Nothing leaves your laptop: it only reads your own machine's
+socket table.
+
+Usage:
+    python3 listener_inventory.py              # inventory of this machine
+    python3 listener_inventory.py --demo       # same report on sample data
+    python3 listener_inventory.py --verbose    # also show the owning process (Linux)
+    python3 listener_inventory.py --json       # machine-readable output
+    python3 listener_inventory.py --risky-only# only flagged listeners
+    python3 listener_inventory.py --port 443   # only look at one port
+    python3 listener_inventory.py --save baseline.json
+    python3 listener_inventory.py --compare baseline.json
+                                               # NEW / GONE since the save
+
+Exit codes: 0 = nothing flagged, 1 = a risky or exposed listener was found,
+2 = a usage error (bad flag, unreadable baseline file, ...).
+
+Safe by default: read-only. No connections to anyone else's machine,
+no port scanning of remote hosts, no changes to the system.
+"""
+
+import argparse
+import json
+import os
+import socket
+import sys
+
+# ---------------------------------------------------------------------------
+# Known services: what a listener on a common port usually means.
+# 'note' is a plain-English explanation for a beginner; 'risk' flags
+# services that commonly appear in attacker tooling or default installs.
+# ---------------------------------------------------------------------------
+KNOWN_SERVICES = {
+    21:   ("FTP",            "old file-transfer protocol (sends passwords in plain text)", True),
+    22:   ("SSH",            "secure remote shell; normal on dev machines/servers", False),
+    23:   ("Telnet",         "ancient remote shell with NO encryption — risky if open", True),
+    25:   ("SMTP",           "mail relay; spammers love open mail servers", True),
+    53:   ("DNS",            "domain-name lookups; expected on routers/VPN tools", False),
+    80:   ("HTTP",           "unencrypted web traffic; normal for local dev servers", False),
+    111:  ("RPC/portmapper", "old Unix service directory; often probed by scanners", True),
+    123:  ("NTP",            "clock sync; abused in the past for reflection attacks", False),
+    139:  ("SMB/NetBIOS",    "Windows file sharing; worms have abused it for years", True),
+    143:  ("IMAP",           "email inbox access", False),
+    161:  ("SNMP",           "network-device monitoring; leaks info if left public", True),
+    443:  ("HTTPS",          "encrypted web traffic; normal", False),
+    445:  ("SMB",            "Windows file sharing (WannaCry used this port)", True),
+    1433: ("MS SQL Server",  "database server; should only listen on localhost", True),
+    1521: ("Oracle DB",      "database server; should only listen on localhost", True),
+    2049: ("NFS",            "network file sharing; dangerous if open to the world", True),
+    2375: ("Docker",         "Docker remote API with NO auth by default — lock it down", True),
+    3306: ("MySQL",          "database server; should only listen on localhost", False),
+    3389: ("RDP",            "Windows Remote Desktop; attackers brute-force it", True),
+    5432: ("PostgreSQL",     "database server; should only listen on localhost", False),
+    5900: ("VNC",            "remote screen sharing; fine on a LAN, scary on the internet", True),
+    6379: ("Redis",          "in-memory database; ship it with a password or bind to localhost", True),
+    6443: ("Kubernetes API", "cluster control plane; should never face the internet", True),
+    8080: ("HTTP-alt",       "web servers and proxies often live here; common in dev", False),
+    8443: ("HTTPS-alt",      "encrypted web traffic on an alternate port", False),
+    9200: ("Elasticsearch",  "search database; has shipped with no password by default", True),
+    11211:("Memcached",      "in-memory cache; abused for huge reflection attacks", True),
+    27017:("MongoDB",        "database server; should only listen on localhost", True),
+    3000: ("Dev server",     "Node/React/Next.js dev servers default to this", False),
+    5000: ("Dev server",     "Flask and other frameworks default to this", False),
+    8000: ("Dev server",     "Django and Python dev servers default to this", False),
+}
+
+# Addresses that mean "only this machine" vs "the whole network can knock".
+LOCALHOST_ADDRESSES = {"127.0.0.1", "::1"}
+WILDCARD_ADDRESSES = {"0.0.0.0", "::"}
+
+# ---------------------------------------------------------------------------
+# Sample data for --demo: rows exactly like Linux /proc/net/tcp, /proc/net/tcp6
+# and /proc/net/udp rows. Fields: sl, local_address(hex ip:hex port),
+# rem_address, st, ... For TCP, st == 0A means LISTENING. UDP has no listen
+# state: st == 07 means the socket is open and waiting for datagrams.
+# ---------------------------------------------------------------------------
+SAMPLE_PROC_LINES = [
+    "  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode",
+    "   0: 0100007F:1F40 00000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 12345 1 0000000000000000 100 0 0 10 0",
+    "   1: 0100007F:01BB 00000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 12346 1 0000000000000000 100 0 0 10 0",
+    "   2: 0100007F:0B54 00000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 12347 1 0000000000000000 100 0 0 10 0",
+    "   3: 00000000:1F90 00000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 12348 1 0000000000000000 100 0 0 10 0",
+    # 0100007F = 127.0.0.1 (hex, reversed), 1F40 = 8000, 01BB = 443,
+    # 0B54 = 2900, 00000000:1F90 = 0.0.0.0:8080 (open to the whole network!)
+]
+SAMPLE_PROC_TCP6_LINES = [
+    "  sl  local_address                         remote_address                        st",
+    "   0: 00000000000000000000000001000000:0016 00000000000000000000000000000000:0000 0A 00000000:00000000 00:00000000 00000000  1000        0 12349 1 0000000000000000 100 0 0 10 0",
+    # ::1 (hex, per-word reversed) on port 0016 = 22 (SSH, localhost-only)
+]
+SAMPLE_PROC_UDP_LINES = [
+    "  sl  local_address rem_address   st tx_queue rx_queue tr tm->when retrnsmt   uid  timeout inode",
+    "   0: 0100007F:0035 00000000:0000 07 00000000:00000000 00:00000000 00000000  1000        0 12350 1 0000000000000000 100 0 0 10 0",
+    # 127.0.0.1:53 (DNS over UDP) — state 07 means "open for datagrams"
+]
+
+
+def hex_port_to_int(hex_port):
+    """Convert a hex port string like '1F40' into the number 8000."""
+    return int(hex_port, 16)
+
+
+def hex_ip_to_str(hex_ip):
+    """
+    Convert a hex IP from /proc/net/* into a readable address.
+    IPv4 (8 hex chars) is stored little-endian: '0100007F' -> '127.0.0.1'.
+    IPv6 (32 hex chars) is stored as four little-endian 32-bit words:
+    '00000000000000000000000001000000' -> '::1'. We reverse the bytes
+    inside each 4-byte word, then let inet_ntop do the formatting.
+    Raises ValueError on malformed input, so a bad row is skipped, not fatal.
+    """
+    raw = bytes.fromhex(hex_ip)
+    if len(raw) == 4:
+        return ".".join(str(b) for b in reversed(raw))
+    if len(raw) == 16:
+        fixed = b"".join(raw[i:i + 4][::-1] for i in range(0, 16, 4))
+        return socket.inet_ntop(socket.AF_INET6, fixed)
+    raise ValueError(f"unexpected address length: {hex_ip!r}")
+
+
+def parse_proc_net(lines, protocol, listen_state):
+    """
+    Read /proc/net/{tcp,tcp6,udp,udp6}-style lines and return a list of
+    listener dicts for every socket in the listening state
+    (TCP '0A', UDP '07'). Malformed rows are skipped with a warning count.
+    """
+    listeners = []
+    skipped = 0
+    for line in lines[1:]:  # first line is the header row
+        parts = line.split()
+        if len(parts) < 10:
+            skipped += 1
+            continue
+        local_address, state = parts[1], parts[3]
+        if state != listen_state:  # only keep sockets that are listening
+            continue
+        try:
+            hex_ip, hex_port = local_address.split(":")
+            address = hex_ip_to_str(hex_ip)
+            port = hex_port_to_int(hex_port)
+            inode = int(parts[9])
+        except (ValueError, IndexError):
+            skipped += 1
+            continue
+        listeners.append({"protocol": protocol, "address": address,
+                          "port": port, "inode": inode, "owner": "?"})
+    return listeners, skipped
+
+
+def find_owning_process(linux_inode, verbose):
+    """
+    On Linux, the inode column links a socket to a process.
+    Walk /proc/<pid>/fd looking for 'socket:[inode]'. Read-only.
+    """
+    if not verbose or linux_inode == 0:
+        return "?"
+    for pid in os.listdir("/proc"):
+        if not pid.isdigit():
+            continue
+        fd_dir = f"/proc/{pid}/fd"
+        try:
+            fds = os.listdir(fd_dir)
+        except (PermissionError, FileNotFoundError):
+            continue
+        for fd in fds:
+            try:
+                target = os.readlink(f"{fd_dir}/{fd}")
+            except OSError:
+                continue
+            if target == f"socket:[{linux_inode}]":
+                try:
+                    with open(f"/proc/{pid}/comm") as f:
+                        return f"{f.read().strip()} (pid {pid})"
+                except OSError:
+                    return f"pid {pid}"
+    return "?"
+
+
+def collect_listeners(demo, verbose):
+    """
+    Inventory this machine's listeners:
+      1. Linux: parse /proc/net/tcp, tcp6, udp and udp6 (the real data).
+      2. Anywhere else: probe common ports on 127.0.0.1 (localhost only).
+    Both stay on your own machine — nothing touches the network.
+    Returns (listeners, skipped_rows).
+    """
+    if demo:
+        listeners, skipped = parse_proc_net(SAMPLE_PROC_LINES, "TCP", "0A")
+        extra, more = parse_proc_net(SAMPLE_PROC_TCP6_LINES, "TCP", "0A")
+        listeners += extra
+        skipped += more
+        extra, more = parse_proc_net(SAMPLE_PROC_UDP_LINES, "UDP", "07")
+        listeners += extra
+        skipped += more
+        return listeners, skipped
+
+    listeners = []
+    skipped = 0
+    # (path, protocol, listen-state) — TCP listens at 0A, UDP sits at 07.
+    for path, protocol, state in (("/proc/net/tcp", "TCP", "0A"),
+                                  ("/proc/net/tcp6", "TCP", "0A"),
+                                  ("/proc/net/udp", "UDP", "07"),
+                                  ("/proc/net/udp6", "UDP", "07")):
+        try:
+            with open(path) as f:
+                lines = f.readlines()
+        except FileNotFoundError:
+            continue
+        except PermissionError:
+            print(f"[warning] cannot read {path} (permission denied) — "
+                  "run as your own user or with sudo to see everything.",
+                  file=sys.stderr)
+            continue
+        found, bad = parse_proc_net(lines, protocol, state)
+        listeners += found
+        skipped += bad
+
+    if listeners:
+        for item in listeners:
+            item["owner"] = find_owning_process(item["inode"], verbose)
+        return listeners, skipped
+
+    # Fallback for macOS/Windows: check common ports on localhost only.
+    print("[info] /proc/net/* not found — probing localhost instead "
+          "(127.0.0.1 only, nothing remote).")
+    for port in sorted(KNOWN_SERVICES):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.25)
+        try:
+            if s.connect_ex(("127.0.0.1", port)) == 0:
+                listeners.append({"protocol": "TCP", "address": "127.0.0.1",
+                                  "port": port, "inode": 0, "owner": "?"})
+        except OSError as exc:
+            print(f"[warning] could not probe port {port}: {exc}",
+                  file=sys.stderr)
+        finally:
+            s.close()
+    return listeners, skipped
+
+
+def describe(port):
+    """Return (name, note, risky) for a port, or a generic label if unknown."""
+    if port in KNOWN_SERVICES:
+        return KNOWN_SERVICES[port]
+    return ("unknown service", "no common service registered here — worth a look", True)
+
+
+def is_exposed(address):
+    """True when a listener faces the whole network (0.0.0.0 or ::)."""
+    return address in WILDCARD_ADDRESSES
+
+
+def listener_key(item):
+    """The identity of a listener, used for --save/--compare baselines."""
+    return (item["protocol"], item["address"], item["port"])
+
+
+def save_baseline(listeners, path):
+    """Write the current listener set to a JSON file for later comparison."""
+    data = [{"protocol": p, "address": a, "port": n}
+            for p, a, n in sorted(listener_key(i) for i in listeners)]
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"[info] baseline saved: {len(data)} listeners -> {path}")
+
+
+def load_baseline(path):
+    """Load a baseline file, or exit 2 with a friendly message if unusable."""
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        print(f"[error] baseline file not found: {path}\n"
+              "        Run with --save first to create one.", file=sys.stderr)
+        sys.exit(2)
+    except (json.JSONDecodeError, OSError) as exc:
+        print(f"[error] cannot read baseline file {path}: {exc}",
+              file=sys.stderr)
+        sys.exit(2)
+    try:
+        return {(item["protocol"], item["address"], item["port"])
+                for item in data}
+    except (KeyError, TypeError):
+        print(f"[error] baseline file {path} is not in the expected format "
+              "(a JSON list of {protocol, address, port}).", file=sys.stderr)
+        sys.exit(2)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Inventory of TCP + UDP listeners on THIS machine (read-only).")
+    parser.add_argument("--demo", action="store_true",
+                        help="run on built-in sample data")
+    parser.add_argument("--verbose", action="store_true",
+                        help="also show the owning process (Linux only)")
+    parser.add_argument("--json", action="store_true",
+                        help="print the report as JSON instead of a table")
+    parser.add_argument("--risky-only", action="store_true",
+                        help="only show risky, unknown or exposed listeners")
+    parser.add_argument("--port", type=int, default=None, metavar="N",
+                        help="only show listeners on port N (1-65535)")
+    parser.add_argument("--save", metavar="FILE",
+                        help="save the current listeners as a baseline JSON file")
+    parser.add_argument("--compare", metavar="FILE",
+                        help="compare against a saved baseline and flag NEW/GONE")
+    args = parser.parse_args()
+
+    if args.port is not None and not 1 <= args.port <= 65535:
+        parser.error("--port must be between 1 and 65535")
+
+    listeners, skipped = collect_listeners(args.demo, args.verbose)
+
+    if args.port is not None:
+        listeners = [i for i in listeners if i["port"] == args.port]
+    if args.risky_only:
+        listeners = [i for i in listeners
+                     if describe(i["port"])[2] or is_exposed(i["address"])]
+
+    # Deduplicate (same socket can appear twice via tcp + tcp6) and sort.
+    seen = {}
+    for item in listeners:
+        seen.setdefault(listener_key(item), item)
+    listeners = sorted(seen.values(),
+                       key=lambda x: (x["port"], x["protocol"], x["address"]))
+
+    if args.save:
+        save_baseline(listeners, args.save)
+
+    changes = {"new": [], "gone": []}
+    if args.compare:
+        baseline = load_baseline(args.compare)
+        now = {listener_key(i) for i in listeners}
+        changes["new"] = sorted(now - baseline)
+        changes["gone"] = sorted(baseline - now)
+
+    if not listeners and not changes["new"] and not changes["gone"]:
+        print("No TCP/UDP listeners found on this machine. Nice and quiet.")
+        return 0
+
+    # Enrich every listener with its service description + exposure flag.
+    for item in listeners:
+        name, note, risky = describe(item["port"])
+        item["service"], item["note"] = name, note
+        item["risky"] = risky
+        item["exposed"] = is_exposed(item["address"])
+        item.pop("inode", None)
+
+    risky_count = sum(1 for i in listeners if i["risky"])
+    exposed_count = sum(1 for i in listeners if i["exposed"])
+
+    if args.json:
+        print(json.dumps({"listeners": listeners,
+                          "changes": {"new": [list(k) for k in changes["new"]],
+                                      "gone": [list(k) for k in changes["gone"]]},
+                          "totals": {"listeners": len(listeners),
+                                     "risky_or_unknown": risky_count,
+                                     "exposed": exposed_count}},
+                         indent=2))
+    else:
+        print(f"\n{'PROTO':<6}{'PORT':<7}{'LISTENING ON':<16}{'SERVICE':<17}"
+              f"{'OWNER':<22}NOTES")
+        print("-" * 112)
+        for item in listeners:
+            flags = ""
+            if item["risky"]:
+                flags += " [!]"
+            if item["exposed"]:
+                flags += " [EXPOSED — anyone on the network can reach it]"
+            print(f"{item['protocol']:<6}{item['port']:<7}{item['address']:<16}"
+                  f"{item['service']:<17}{item['owner']:<22}"
+                  f"{item['note']}{flags}")
+        print("-" * 112)
+        print(f"Total listening ports: {len(listeners)} "
+              f"({sum(1 for i in listeners if i['protocol'] == 'TCP')} TCP, "
+              f"{sum(1 for i in listeners if i['protocol'] == 'UDP')} UDP)")
+        print(f"Flagged as risky/unknown: {risky_count}")
+        print(f"Exposed to the whole network: {exposed_count}")
+        if changes["new"]:
+            print("\nNEW since baseline:")
+            for proto, addr, port in changes["new"]:
+                print(f"  + {proto} {addr}:{port} — a door opened since the last check")
+        if changes["gone"]:
+            print("\nGONE since baseline:")
+            for proto, addr, port in changes["gone"]:
+                print(f"  - {proto} {addr}:{port} — a door closed since the last check")
+        if skipped:
+            print(f"\n[info] skipped {skipped} malformed socket-table row(s).")
+        print("\nSOC takeaway: your attack surface is the sum of these doors. "
+              "A listener you can't explain is your first lead —\n"
+              "figure out what it is, then decide whether it should be listening at all.")
+
+    # Exit 1 when something deserves a look, so scripts and cron jobs can react.
+    if risky_count or exposed_count or changes["new"]:
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

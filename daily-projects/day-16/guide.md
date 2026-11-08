@@ -1,1 +1,151 @@
-IyBEYXkgMTY6IFdoYXQgSXMgTGlzdGVuaW5nIG9uIFlvdXIgTGFwdG9wPyDigJQgTGlzdGVuaW5nIFNlcnZpY2UgSW52ZW50b3J5CgojIyBUaGUgYmlnIGlkZWEgKHRoZSBub24tdGVjaCBhbmFsb2d5KQoKVGhpbmsgb2YgeW91ciBsYXB0b3AgYXMgYW4gYXBhcnRtZW50IGJ1aWxkaW5nLiBBICoqcG9ydCoqIGlzIGxpa2UgYSBkb29yLAphbmQgYSAqKmxpc3RlbmluZyBwb3J0KiogaXMgYSBkb29yIHRoYXQgaXMgdW5sb2NrZWQgYW5kIHdhaXRpbmcgZm9yIHZpc2l0b3JzLgpTb21lIGRvb3JzIHNob3VsZCBiZSBvcGVuOiB0aGUgbWFpbCBzbG90IChlbWFpbCksIHRoZSBzZXJ2aWNlIGVudHJhbmNlIHlvdQp1c2UgeW91cnNlbGYgKGEgZGV2IHNlcnZlciB5b3Ugc3RhcnRlZCBvbiBwdXJwb3NlKS4KCkJ1dCBzb21ldGltZXMgdGhlcmUgYXJlIGRvb3JzIHlvdSBkaWRuJ3Qga25vdyBleGlzdGVkIOKAlCBhIGJhY2sgZG9vciBsZWZ0Cm9wZW4gYnkgYSBwcm9ncmFtIHlvdSBpbnN0YWxsZWQgbW9udGhzIGFnbywgb3Igd29yc2UsIGJ5IG1hbHdhcmUuIFNlY3VyaXR5CmFuYWx5c3RzIGNhbGwgdGhlIHN1bSBvZiBhbGwgdGhlc2UgZG9vcnMgeW91ciAqKmF0dGFjayBzdXJmYWNlKio6IGV2ZXJ5IG9wZW4KZG9vciBpcyBvbmUgbW9yZSB3YXkgaW4uCgpUaGUgZmlyc3Qgc3RlcCBvZiBhbnkgc2VjdXJpdHkgY2hlY2sgaXMgc2ltcGx5IGNvdW50aW5nIHlvdXIgZG9vcnMuIFRoYXQgaXMKd2hhdCB0aGlzIHNjcmlwdCBkb2VzIOKAlCBvbiBZT1VSIG1hY2hpbmUgb25seSwgYW5kIHdpdGhvdXQgY2hhbmdpbmcgYW55dGhpbmcuCgojIyBXaGF0IHRoZSBzY3JpcHQgZG9lcwoKUnVubmluZyBpdCBwcmludHMgYSB0YWJsZSBsaWtlIHRoaXM6CgpgYGAKUE9SVCAgIExJU1RFTklORyBPTiAgIFNFUlZJQ0UgICAgICAgICBPV05FUiAgICAgICAgICAgICAgICAgTk9URVMKODAwMCAgIDEyNy4wLjAuMSAgICAgIERldiBzZXJ2ZXIgICAgICA/ICAgICAgICAgICAgICAgICAgICAgRGphbmdvIGFuZCBQeXRob24gZGV2IHNlcnZlcnMgZGVmYXVsdCB0byB0aGlzCjI5MDAgICAxMjcuMC4wLjEgICAgICB1bmtub3duIHNlcnZpY2UgPyAgICAgICAgICAgICAgICAgICAgIG5vIGNvbW1vbiBzZXJ2aWNlIHJlZ2lzdGVyZWQgaGVyZSDigJQgd29ydGggYSBsb29rIFshXQpgYGAKCkZvciBlYWNoIGxpc3RlbmluZyBwb3J0IGl0IHNob3dzOgoKLSAqKlBPUlQqKiDigJQgdGhlIGRvb3IgbnVtYmVyLgotICoqTElTVEVOSU5HIE9OKiog4oCUIHdoaWNoIGFkZHJlc3MgdGhlIGRvb3IgZmFjZXMuIGAxMjcuMC4wLjFgIG1lYW5zICJvbmx5CiAgcGVvcGxlIGFscmVhZHkgaW5zaWRlIHRoaXMgbGFwdG9wIGNhbiBrbm9jay4iIGAwLjAuMC4wYCB3b3VsZCBtZWFuICJ0aGUKICB3aG9sZSB3b3JsZCBjYW4ga25vY2siIOKAlCBtdWNoIG1vcmUgZXhwb3NlZC4KLSAqKlNFUlZJQ0UqKiDigJQgaXRzIGJlc3QgZ3Vlc3MgYXQgd2hhdCdzIGJlaGluZCB0aGUgZG9vciAoZnJvbSBhIGJ1aWx0LWluCiAgbGlzdCBvZiBjb21tb24gcG9ydHMpLgotICoqT1dORVIqKiDigJQgd2hpY2ggcHJvZ3JhbSBob2xkcyB0aGUgZG9vciBvcGVuIChgLS12ZXJib3NlYCwgTGludXggb25seSkuCi0gKipOT1RFUyArIFshXSoqIOKAlCBwbGFpbi1FbmdsaXNoIGNvbnRleHQsIGFuZCBhIGZsYWcgb24gcG9ydHMgdGhhdCBhcmUKICBoaXN0b3JpY2FsbHkgcmlza3kgKFRlbG5ldCwgRlRQLCBTTUIsIFJEUCkgb3IganVzdCB1bmtub3duLgoKIyMgSG93IHRoZSBjb2RlIHdvcmtzLCBsaW5lIGJ5IGxpbmUKCjEuICoqS05PV05fU0VSVklDRVMqKiDigJQgYSBkaWN0aW9uYXJ5IChhIGxvb2t1cCB0YWJsZSkgbWFwcGluZyBwb3J0IG51bWJlcnMKICAgdG8gd2hhdCB1c3VhbGx5IGxpdmVzIHRoZXJlOiAyMiA9IFNTSCwgODAgPSBIVFRQLCAzMzg5ID0gUkRQLCBhbmQgc28gb24uCiAgIEVhY2ggZW50cnkgYWxzbyBjYXJyaWVzIGEgc2hvcnQgZXhwbGFuYXRpb24gYW5kIHdoZXRoZXIgdGhlIHBvcnQgaXMKICAgY29tbW9ubHkgYWJ1c2VkLgoKMi4gKipoZXhfcG9ydF90b19pbnQgLyBoZXhfaXBfdG9fc3RyKiog4oCUIExpbnV4IHN0b3JlcyBzb2NrZXQgaW5mbyBpbgogICBoZXhhZGVjaW1hbCAoYmFzZSAxNikuIFRoZXNlIHR3byB0aW55IGhlbHBlcnMgdHJhbnNsYXRlLCBlLmcuIGAxRjQwYAogICBpbnRvIHBvcnQgYDgwMDBgIGFuZCBgMDEwMDAwN0ZgIGludG8gYDEyNy4wLjAuMWAuCgozLiAqKnBhcnNlX3Byb2NfbmV0X3RjcCoqIOKAlCBMaW51eCBrZWVwcyBhIGxpdmUgbGlzdCBvZiBldmVyeSBUQ1Agc29ja2V0IGluCiAgIHRoZSBmaWxlIGAvcHJvYy9uZXQvdGNwYC4gSXQncyBub3QgYSByZWFsIGZpbGUgb24gZGlzazsgdGhlIG9wZXJhdGluZwogICBzeXN0ZW0gZ2VuZXJhdGVzIGl0IG9uIHRoZSBmbHksIGxpa2UgYSBkYXNoYm9hcmQuIEVhY2ggcm93IGhhcyBhIHN0YXRlCiAgIGNvbHVtbiwgYW5kIGAwQWAgbWVhbnMgIkxJU1RFTklORyIuIFRoZSBmdW5jdGlvbiBrZWVwcyBvbmx5IHRob3NlIHJvd3MuCgo0LiAqKmZpbmRfb3duaW5nX3Byb2Nlc3MqKiDigJQgZXZlcnkgc29ja2V0IGhhcyBhbiBJRCBudW1iZXIgKGFuICJpbm9kZSIpLgogICBPbiBMaW51eCB5b3UgY2FuIHdhbGsgdGhyb3VnaCBgL3Byb2MvPHBpZD4vZmRgIChlYWNoIHJ1bm5pbmcgcHJvZ3JhbSdzCiAgIG9wZW4gZmlsZXMpIHRvIGZpbmQgd2hpY2ggcHJvZ3JhbSBvd25zIGEgZ2l2ZW4gc29ja2V0IElELiBUaGUgc2NyaXB0IGRvZXMKICAgdGhpcyByZWFkLW9ubHkg4oCUIGl0IG9ubHkgKmxvb2tzKi4KCjUuICoqY29sbGVjdF9saXN0ZW5lcnMqKiDigJQgdGhlIG1haW4gZGF0YS1nYXRoZXJpbmcgc3RlcC4gT24gTGludXggaXQgcmVhZHMKICAgYC9wcm9jL25ldC90Y3BgOyBvbiBNYWMgb3IgV2luZG93cyAod2hlcmUgdGhhdCBmaWxlIGRvZXNuJ3QgZXhpc3QpIGl0CiAgIGZhbGxzIGJhY2sgdG8gZ2VudGx5IGtub2NraW5nIG9uIGNvbW1vbiBwb3J0cyBvZiBgMTI3LjAuMC4xYCAoeW91ciBvd24KICAgbG9vcGJhY2sgYWRkcmVzcykgYW5kIG5vdGluZyB3aGljaCBhbnN3ZXIuICoqSXQgbmV2ZXIgY29udGFjdHMgYW55IG90aGVyCiAgIGNvbXB1dGVyLioqCgo2LiAqKmRlc2NyaWJlKiog4oCUIGxvb2tzIGEgcG9ydCB1cCBpbiB0aGUga25vd24tc2VydmljZXMgdGFibGUuIEFueXRoaW5nIG5vdAogICBpbiB0aGUgdGFibGUgaXMgcmVwb3J0ZWQgYXMgInVua25vd24gc2VydmljZSIgYW5kIGZsYWdnZWQg4oCUIGJlY2F1c2UgdGhlCiAgIHdob2xlIHBvaW50IGlzIHRoYXQgYW4gdW5leHBsYWluZWQgZG9vciBkZXNlcnZlcyBhIHF1ZXN0aW9uLCBub3QgYW4KICAgYXNzdW1wdGlvbi4KCjcuICoqbWFpbioqIOKAlCB0aWVzIGl0IHRvZ2V0aGVyOiBwYXJzZSBgLS1kZW1vYC9gLS12ZXJib3NlYCBmbGFncywgY29sbGVjdAogICB0aGUgbGlzdGVuZXJzLCBwcmludCB0aGUgdGFibGUsIGFuZCBmaW5pc2ggd2l0aCB0b3RhbHMgYW5kIHRoZSBTT0MKICAgdGFrZWF3YXkuCgojIyBLZXkgdGVybXMsIHRyYW5zbGF0ZWQKCi0gKipQb3J0Kiog4oCUIGEgbnVtYmVyZWQgZG9vciBvbiB5b3VyIG1hY2hpbmUgd2hlcmUgbmV0d29yayB0cmFmZmljIGFycml2ZXMuCiAgVGhlcmUgYXJlIDY1LDUzNSBwb3NzaWJsZSBwb3J0cy4KLSAqKkxpc3RlbmVyIC8gbGlzdGVuaW5nIHNvY2tldCoqIOKAlCBhIHByb2dyYW0gdGhhdCBoYXMgb3BlbmVkIGEgZG9vciBhbmQgaXMKICB3YWl0aW5nIGZvciBzb21lb25lIHRvIGtub2NrLgotICoqMTI3LjAuMC4xIChsb29wYmFjaykqKiDigJQgInRoaXMgbWFjaGluZSIuIFRyYWZmaWMgdG8gdGhpcyBhZGRyZXNzIG5ldmVyCiAgbGVhdmVzIHlvdXIgbGFwdG9wLgotICoqQXR0YWNrIHN1cmZhY2UqKiDigJQgZXZlcnl0aGluZyBhbiBhdHRhY2tlciBjb3VsZCBwb3RlbnRpYWxseSB0b3VjaC4gRmV3ZXIKICBvcGVuIGRvb3JzID0gc21hbGxlciBhdHRhY2sgc3VyZmFjZS4KLSAqKlNPQyoqIOKAlCBTZWN1cml0eSBPcGVyYXRpb25zIENlbnRlciwgdGhlIHRlYW0gdGhhdCB3YXRjaGVzIGZvciBhdHRhY2tzLgogIFNPQyBhbmFseXN0cyByb3V0aW5lbHkgYXVkaXQgbGlzdGVuZXJzIHRvIHNwb3Qgcm9ndWUgc2VydmljZXMuCgojIyBIb3cgdG8gcnVuIGl0CgpgYGBiYXNoCnB5dGhvbjMgbGlzdGVuZXJfaW52ZW50b3J5LnB5ICAgICAgICAgICAgIyBpbnZlbnRvcnkgb2YgdGhpcyBtYWNoaW5lCnB5dGhvbjMgbGlzdGVuZXJfaW52ZW50b3J5LnB5IC0tZGVtbyAgICAgIyBzYW1lIHJlcG9ydCBvbiBzYW1wbGUgZGF0YQpweXRob24zIGxpc3RlbmVyX2ludmVudG9yeS5weSAtLXZlcmJvc2UgICMgYWxzbyBzaG93IHRoZSBvd25pbmcgcHJvZ3JhbSAoTGludXgpCmBgYAoKTm8gcGFja2FnZXMgdG8gaW5zdGFsbCDigJQgaXQgb25seSB1c2VzIFB5dGhvbidzIHN0YW5kYXJkIGxpYnJhcnkuCgojIyBXaGF0IHRvIHRyeSBuZXh0CgoxLiBSdW4gaXQsIHBpY2sgb25lIGxpc3RlbmVyIHlvdSByZWNvZ25pemUsIGFuZCBjb25maXJtIHdoaWNoIHByb2dyYW0gaXQKICAgYmVsb25ncyB0byAoYC0tdmVyYm9zZWAgb24gTGludXgsIG9yIHlvdXIgT1MncyB0YXNrIG1hbmFnZXIpLgoyLiBGaW5kIG9uZSB0aGluZyBsaXN0ZW5pbmcgeW91ICpkaWRuJ3QqIGV4cGVjdCBhbmQgcmVzZWFyY2ggaXQuIElzIGl0IGEKICAgZmVhdHVyZSwgYSBmb3Jnb3R0ZW4gaW5zdGFsbCwgb3Igc29tZXRoaW5nIHRvIHJlbW92ZT8KMy4gQ2hlY2sgd2hldGhlciBhbnkgbGlzdGVuZXIgZmFjZXMgYDAuMC4wLjBgICh0aGUgd2hvbGUgd29ybGQpIGluc3RlYWQgb2YKICAgYDEyNy4wLjAuMWAuIEFzayB5b3Vyc2VsZjogZG9lcyBpdCBuZWVkIHRvPwo0LiBGb3IgU09DIHByYWN0aWNlOiBwYWlyIHRoaXMgd2l0aCB5ZXN0ZXJkYXkncyBhY2NvdW50LXRha2VvdmVyIGRldGVjdG9yLgogICBBbiB1bmtub3duIGxpc3RlbmVyICpwbHVzKiBzdXNwaWNpb3VzIGxvZ2luIGF0dGVtcHRzIGlzIGhvdyByZWFsCiAgIGludmVzdGlnYXRpb25zIHN0YXJ0IOKAlCBvbmUgd2VhayBzaWduYWwgcmFyZWx5IHN0YW5kcyBhbG9uZS4K
+# Day 16: What Is Listening on Your Laptop? — Listening Service Inventory
+
+## What's new in this version (improved 2026-11-06)
+
+The first version only counted TCP doors and quietly skipped anything it
+didn't understand. This version counts more doors, and is honest about
+which ones face the whole street:
+
+- **UDP listeners are now counted too.** The old script only looked at TCP
+  (the "phone call" kind of connection). UDP (the "postcard" kind — used by
+  DNS, gaming, video calls) now shows up in the same table with a PROTO
+  column, so no door is missed.
+- **Real IPv6 support — a bug fix.** The old script silently skipped every
+  IPv6 listener (it saw an address it couldn't read and threw it away).
+  Now `::1` and other IPv6 addresses are decoded properly and listed.
+- **EXPOSED flag: localhost vs. the whole network.** A door on `127.0.0.1`
+  can only be knocked on from inside your own laptop. A door on `0.0.0.0`
+  can be knocked on by anyone on your network — or the internet. Those
+  now get a big `[EXPOSED]` warning, because that's the first thing a SOC
+  analyst checks.
+- **--save / --compare baseline.** Save today's door list, run it again
+  next week, and the script tells you which doors are NEW and which are
+  GONE — like a "what changed since last time" alarm.
+- **--json output** for feeding the results into other tools or a report,
+  plus **--risky-only** and **--port N** filters so you can zoom in on one
+  door instead of reading the whole list.
+- **More services recognized** (Docker, Kubernetes, Elasticsearch,
+  Memcached, SNMP, NFS, databases…) and **clear exit codes**: 0 = all
+  quiet, 1 = something risky or exposed was found, 2 = a usage error.
+
+## The big idea (the non-tech analogy)
+
+Think of your laptop as an apartment building. A **port** is like a door,
+and a **listening port** is a door that is unlocked and waiting for visitors.
+Some doors should be open: the mail slot (email), the service entrance you
+use yourself (a dev server you started on purpose).
+
+But sometimes there are doors you didn't know existed — a back door left
+open by a program you installed months ago, or worse, by malware. Security
+analysts call the sum of all these doors your **attack surface**: every open
+door is one more way in.
+
+The first step of any security check is simply counting your doors. That is
+what this script does — on YOUR machine only, and without changing anything.
+
+## What the script does
+
+Running it prints a table like this:
+
+```
+PORT   LISTENING ON   SERVICE         OWNER                 NOTES
+8000   127.0.0.1      Dev server      ?                     Django and Python dev servers default to this
+2900   127.0.0.1      unknown service ?                     no common service registered here — worth a look [!]
+```
+
+For each listening port it shows:
+
+- **PORT** — the door number.
+- **LISTENING ON** — which address the door faces. `127.0.0.1` means "only
+  people already inside this laptop can knock." `0.0.0.0` would mean "the
+  whole world can knock" — much more exposed.
+- **SERVICE** — its best guess at what's behind the door (from a built-in
+  list of common ports).
+- **OWNER** — which program holds the door open (`--verbose`, Linux only).
+- **NOTES + [!]** — plain-English context, and a flag on ports that are
+  historically risky (Telnet, FTP, SMB, RDP) or just unknown.
+
+## How the code works, line by line
+
+1. **KNOWN_SERVICES** — a dictionary (a lookup table) mapping port numbers
+   to what usually lives there: 22 = SSH, 80 = HTTP, 3389 = RDP, and so on.
+   Each entry also carries a short explanation and whether the port is
+   commonly abused.
+
+2. **hex_port_to_int / hex_ip_to_str** — Linux stores socket info in
+   hexadecimal (base 16). These two tiny helpers translate, e.g. `1F40`
+   into port `8000` and `0100007F` into `127.0.0.1`.
+
+3. **parse_proc_net_tcp** — Linux keeps a live list of every TCP socket in
+   the file `/proc/net/tcp`. It's not a real file on disk; the operating
+   system generates it on the fly, like a dashboard. Each row has a state
+   column, and `0A` means "LISTENING". The function keeps only those rows.
+
+4. **find_owning_process** — every socket has an ID number (an "inode").
+   On Linux you can walk through `/proc/<pid>/fd` (each running program's
+   open files) to find which program owns a given socket ID. The script does
+   this read-only — it only *looks*.
+
+5. **collect_listeners** — the main data-gathering step. On Linux it reads
+   `/proc/net/tcp`; on Mac or Windows (where that file doesn't exist) it
+   falls back to gently knocking on common ports of `127.0.0.1` (your own
+   loopback address) and noting which answer. **It never contacts any other
+   computer.**
+
+6. **describe** — looks a port up in the known-services table. Anything not
+   in the table is reported as "unknown service" and flagged — because the
+   whole point is that an unexplained door deserves a question, not an
+   assumption.
+
+7. **main** — ties it together: parse `--demo`/`--verbose` flags, collect
+   the listeners, print the table, and finish with totals and the SOC
+   takeaway.
+
+**New in this version:** `parse_proc_net` now takes a protocol and a
+listen state, so the same code reads TCP (`0A` = listening) and UDP
+(`07` = open for datagrams), and `hex_ip_to_str` understands IPv6
+addresses. `is_exposed` checks whether a listener sits on `0.0.0.0` or
+`::` (the whole network) instead of localhost. `save_baseline` /
+`load_baseline` store today's door list as JSON so `--compare` can flag
+NEW and GONE listeners, and `main` returns exit code 1 when anything
+risky, exposed, or new shows up.
+
+## Key terms, translated
+
+- **Port** — a numbered door on your machine where network traffic arrives.
+  There are 65,535 possible ports.
+- **Listener / listening socket** — a program that has opened a door and is
+  waiting for someone to knock.
+- **127.0.0.1 (loopback)** — "this machine". Traffic to this address never
+  leaves your laptop.
+- **Attack surface** — everything an attacker could potentially touch. Fewer
+  open doors = smaller attack surface.
+- **SOC** — Security Operations Center, the team that watches for attacks.
+  SOC analysts routinely audit listeners to spot rogue services.
+
+## How to run it
+
+```bash
+python3 listener_inventory.py            # inventory of this machine
+python3 listener_inventory.py --demo     # same report on sample data
+python3 listener_inventory.py --verbose  # also show the owning program (Linux)
+python3 listener_inventory.py --json     # machine-readable output
+python3 listener_inventory.py --risky-only  # only flagged listeners
+python3 listener_inventory.py --port 443    # zoom in on one port
+python3 listener_inventory.py --save baseline.json     # remember today's doors
+python3 listener_inventory.py --compare baseline.json  # what's NEW / GONE?
+```
+
+No packages to install — it only uses Python's standard library.
+
+## What to try next
+
+1. Run it, pick one listener you recognize, and confirm which program it
+   belongs to (`--verbose` on Linux, or your OS's task manager).
+2. Find one thing listening you *didn't* expect and research it. Is it a
+   feature, a forgotten install, or something to remove?
+3. Check whether any listener faces `0.0.0.0` (the whole world) instead of
+   `127.0.0.1`. Ask yourself: does it need to?
+4. For SOC practice: pair this with yesterday's account-takeover detector.
+   An unknown listener *plus* suspicious login attempts is how real
+   investigations start — one weak signal rarely stands alone.
