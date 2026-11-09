@@ -1,0 +1,11 @@
+# Sample watchlist for ioc_matcher.py — use with --watchlist sample_watchlist.txt
+# One indicator per line: type value severity note...
+# Types: ip (single address or CIDR block), domain, hash
+# Lines starting with # are comments. All values are fake documentation
+# examples (RFC 5737 ranges, .example domains) so they can never be real.
+ip     203.0.113.77              HIGH      known malware command-and-control server
+ip     198.51.100.23             HIGH      known ransomware distribution host
+ip     192.0.2.0/24              MEDIUM    reported scanning network block
+domain invoice-verify-2026.example HIGH     phishing domain from a recent campaign
+domain free-prize-claim.example    HIGH      fake giveaway site that drops malware
+hash   d41d8cd98f00b204e9800998ecf8427e CRITICAL known trojan dropper
