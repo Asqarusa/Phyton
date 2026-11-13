@@ -1,1 +1,18 @@
-IyBTYW1wbGUgYmFubmVycyBmb3IgYmFubmVyX2dyYWJiZXIucHkgLS1kZW1vIG1vZGUKIyBGb3JtYXQ6IFBPUlQgfCBCQU5ORVIgKG9uZSBwZXIgbGluZSwgIyA9IGNvbW1lbnQpCjIxIHwgMjIwIFdlbGNvbWUgdG8gdnNmdHBkIEZUUCBzZXJ2aWNlLgoyMiB8IFNTSC0yLjAtT3BlblNTSF84LjlwMSBVYnVudHUtM3VidW50dTAuNAoyMyB8IDIyMC1tYWlsLmV4YW1wbGUubmV0IEVTTVRQIEV4aW0gNC45NgoyNSB8IDIyMCBtYWlsLmV4YW1wbGUubmV0IEVTTVRQIFBvc3RmaXgKNTMgfCAoRE5TIHNwZWFrcyBhIGJpbmFyeSBwcm90b2NvbDsgbm8gdGV4dCBiYW5uZXIgaXMgc2VudC4pCjgwIHwgSFRUUC8xLjEgNDAwIEJhZCBSZXF1ZXN0CjExMCB8ICtPSyBEb3ZlY290IHJlYWR5LgoxNDMgfCAqIE9LIFtDQVBBQklMSVRZIElNQVA0cmV2MV0gQ291cmllci1JTUFQIHJlYWR5CjQ0MyB8IChIVFRQUy9UTFM6IHRoZSBoYW5kc2hha2UgaXMgZW5jcnlwdGVkOyBubyByZWFkYWJsZSBiYW5uZXIgYXBwZWFycyBoZXJlLikKMzMwNiB8IDguMC4zMlx4MDAuLi4gKE15U1FMIHNlbmRzIGEgYmluYXJ5IGhhbmRzaGFrZSwgbm90IHBsYWluIHRleHQuKQozMzg5IHwgKFJEUCB1c2VzIGEgYmluYXJ5IHByb3RvY29sOyBub3RoaW5nIHJlYWRhYmxlIG9uIGNvbm5lY3QuKQo=
+# Sample banners for banner_grabber.py --demo mode
+# Format: PORT | BANNER (one per line, # = comment)
+21 | 220 Welcome to vsftpd FTP service.
+22 | SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4
+23 | 220-mail.example.net ESMTP Exim 4.96
+25 | 220 mail.example.net ESMTP Postfix
+53 | (DNS speaks a binary protocol; no text banner is sent.)
+80 | HTTP/1.1 400 Bad Request
+110 | +OK Dovecot ready.
+143 | * OK [CAPABILITY IMAP4rev1] Courier-IMAP ready
+443 | (HTTPS/TLS: the handshake is encrypted; no readable banner appears here.)
+3306 | 8.0.32\x00... (MySQL sends a binary handshake, not plain text.)
+3389 | (RDP uses a binary protocol; nothing readable on connect.)
+8080 | HTTP/1.1 200 OK -- Server: Apache/2.2.34 (Unix)
+8081 | HTTP/1.1 200 OK -- Server: nginx/1.18.0
+2222 | SSH-2.0-OpenSSH_7.4p1 Debian-10+deb9u7
+2121 | 220 (vsFTPd 2.3.4)
+2122 | 220 ProFTPD 1.3.5a Server ready.

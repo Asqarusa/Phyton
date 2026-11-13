@@ -1,1 +1,82 @@
-IyBCYW5uZXIgR3JhYmJlciDigJQgcmVhZGluZyB0aGUgbmFtZXBsYXRlcyBvbiB5b3VyIG93biBkb29ycwoKKipEYXkgMjAgwrcgbmV0d29ya2luZyBzZXJpZXMgwrcgYnkgQXNrYXJiZWsgQWtocm9yb3YqKgpDb2RlOiBgYmFubmVyX2dyYWJiZXIucHlgICgrIGBzYW1wbGVfYmFubmVycy50eHRgKQoKIyMgVGhlIGJpZyBpZGVhIChhbmFsb2d5IGZpcnN0KQoKTGFzdCB0aW1lIHdlIHdhbGtlZCB0aGUgaGFsbHdheSBhbmQgZm91bmQgd2hpY2ggZG9vcnMgd2VyZSBvcGVuIOKAlCB0aGF0IHdhcyB0aGUgcG9ydCBzY2FubmVyLiBUb2RheSB3ZSAqa25vY2sgb24gZWFjaCBvcGVuIGRvb3IgYW5kIHJlYWQgdGhlIG5hbWVwbGF0ZSouCgpBbG1vc3QgZXZlcnkgbmV0d29yayBzZXJ2aWNlIGdyZWV0cyBhIG5ldyBjb25uZWN0aW9uIHdpdGggYSBzaG9ydCBtZXNzYWdlIGNhbGxlZCBhICoqYmFubmVyKiouIEl0IHVzdWFsbHkgc2F5cyB3aGF0IHRoZSBzZXJ2aWNlIGlzIGFuZCBleGFjdGx5IHdoaWNoIHZlcnNpb246IGBTU0gtMi4wLU9wZW5TU0hfOC45cDEgVWJ1bnR1LTN1YnVudHUwLjRgLiBJbWFnaW5lIGV2ZXJ5IG9mZmljZSBkb29yIGluIGEgYnVpbGRpbmcgaGFkIGEgbGl0dGxlIHBsYXF1ZSByZWFkaW5nICJEb29yIGNvLiBtb2RlbCAyMDE3LCBsb2NrIHNlcmlhbCA0NDgyIiDigJQgY29udmVuaWVudCBmb3IgdGhlIG1haW50ZW5hbmNlIGNyZXcsIGFuZCBlcXVhbGx5IGNvbnZlbmllbnQgZm9yIGEgYnVyZ2xhciB3aG8ga25vd3MgZXhhY3RseSB3aGljaCBsb2NrLXBpY2tzIGZpdCBtb2RlbCAyMDE3LgoKVGhhdCdzIHRoZSBkb3VibGUgZWRnZSBvZiBiYW5uZXJzOgotICoqRGVmZW5kZXJzKiogdXNlIHRoZW0gdG8gdGFrZSBpbnZlbnRvcnk6IHdoYXQgcnVucyBvbiBteSBtYWNoaW5lLCBhbmQgd2hhdCBuZWVkcyBwYXRjaGluZz8KLSAqKkF0dGFja2VycyoqIHVzZSB0aGVtIGZvciB0aGUgc2FtZSByZWFzb246IGFuIGV4YWN0IHZlcnNpb24gbnVtYmVyIHRlbGxzIHRoZW0gd2hpY2gga25vd24gZXhwbG9pdCB0byB0cnkuCgpUaGlzIGlzIHdoeSAidmVyc2lvbiBkaXNjbG9zdXJlIiDigJQgYSBzZXJ2aWNlIGFkdmVydGlzaW5nIGl0cyBleGFjdCB2ZXJzaW9uIOKAlCBpcyB0cmVhdGVkIGFzIGEgbWlzY29uZmlndXJhdGlvbiBpbiBzZWN1cml0eSBoYXJkZW5pbmcuIE9uZSBvZiB0aGUgY2hlYXBlc3QgaGFyZGVuaW5nIHdpbnMgdGhlcmUgaXM6IG1ha2UgdGhlIGJhbm5lciBzYXkgbGVzcy4KCiMjIFdoYXQgdGhlIHNjcmlwdCBkb2VzCgoxLiBDb25uZWN0cyB0byBhIGxpc3Qgb2YgY29tbW9uIHBvcnRzICoqb24geW91ciBvd24gbWFjaGluZSBvbmx5KiogKDEyNy4wLjAuMSDigJQgbG9jYWxob3N0OyBhbnkgb3RoZXIgYWRkcmVzcyBpcyByZWZ1c2VkIGJ5IGRlc2lnbikuCjIuIFJlYWRzIHRoZSBmaXJzdCB+MSBLQiB0aGUgc2VydmljZSBzZW5kcyDigJQgdGhlIGJhbm5lciDigJQgdGhlbiBwb2xpdGVseSBoYW5ncyB1cC4KMy4gVGFrZXMgYSBiZXN0IGd1ZXNzIGF0IHdoaWNoIHNlcnZpY2UgaXQgaXMgKFNTSCBzZXJ2ZXIsIHdlYiBzZXJ2ZXIsIG1haWwgc2VydmVy4oCmKSBmcm9tIGtub3duIGJhbm5lciBmcmFnbWVudHMuCjQuIEZsYWdzIGJhbm5lcnMgdGhhdCBsZWFrIGEgdmVyc2lvbiBudW1iZXIsIHdpdGggdGhlIGhhcmRlbmluZyByZW1pbmRlci4KNS4gYC0tZGVtb2AgbW9kZSByZXBsYXlzIHJlYWwtd29ybGQgc2FtcGxlIGJhbm5lcnMgZnJvbSBgc2FtcGxlX2Jhbm5lcnMudHh0YCB3aXRoIHplcm8gbmV0d29yayB0cmFmZmljLCBzbyBpdCB3b3JrcyBvbiBhbnkgbGFwdG9wIOKAlCBldmVuIG9uZSB3aXRoIG5vdGhpbmcgbGlzdGVuaW5nLgoKSFRUUCBzZXJ2ZXJzIGRvbid0IHZvbHVudGVlciBhIGJhbm5lciwgc28gZm9yIHRob3NlIHRoZSBzY3JpcHQgc2VuZHMgYSBtaW5pbWFsIGBIRUFEIC9gIHJlcXVlc3QgdG8gY29heCBhIHJlcGx5LCBsaWtlIHNheWluZyAiaGVsbG8/IiB0aHJvdWdoIGEgZG9vciB0aGF0IGRvZXNuJ3QgaGF2ZSBhIG5hbWVwbGF0ZS4KCiMjIEhvdyB0aGUgY29kZSB3b3JrcyAobGluZSBieSBsaW5lLCBzaW1wbGUgdGVybXMpCgotICoqYERFRkFVTFRfUE9SVFNgKiog4oCUIHRoZSB1c3VhbCBzdXNwZWN0czogMjEgKEZUUCksIDIyIChTU0gpLCAyNS8xMTAvMTQzIChtYWlsKSwgODAvNDQzICh3ZWIpLCAzMzA2IChNeVNRTCksIDMzODkgKFJEUCksIGFuZCBmcmllbmRzLgotICoqYEFMTE9XRURfVEFSR0VUID0gIjEyNy4wLjAuMSJgKiog4oCUIHRoZSBzYWZldHkgbG9jay4gVGhlIHdob2xlIHNjcmlwdCBpcyBidWlsdCBhcm91bmQgdGhpcyBvbmUgY29uc3RhbnQ6IGl0IGNhbiBvbmx5IGV2ZXIga25vY2sgb24geW91ciBvd24gbWFjaGluZS4gRGVmZW5zaXZlIGVkdWNhdGlvbiBvbmx5LgotICoqYEtOT1dOX1NJR05BVFVSRVNgKiog4oCUIGEgY2hlYXQgc2hlZXQ6IGlmIHRoZSBiYW5uZXIgY29udGFpbnMgIlNTSC0iIGl0J3MgYW4gU1NIIHNlcnZlcjsgIitPSyIgbWVhbnMgUE9QMy1zdHlsZSBtYWlsOyAidnNmdHBkIiBpcyB2c2Z0cGQgRlRQLCBhbmQgc28gb24uIFRoaXMgaXMgZmluZ2VycHJpbnRpbmcsIHNpbXBsaWZpZWQuCi0gKipgZ3JhYl9iYW5uZXIocG9ydCwgdGltZW91dClgKiog4oCUIG9wZW5zIGEgVENQIGNvbm5lY3Rpb24gKGBzb2NrZXQuY29ubmVjdGApLCBhc2tzIHBvbGl0ZWx5IGZvciB1cCB0byAxMDI0IGJ5dGVzIChgc29jay5yZWN2YCksIGRlY29kZXMgdGhlbSBpbnRvIHRleHQsIGFuZCBjbG9zZXMgdGhlIGNvbm5lY3Rpb24uIElmIG5vdGhpbmcgYW5zd2VycyAoY29ubmVjdGlvbiByZWZ1c2VkLCB0aW1lb3V0KSwgaXQgcmV0dXJucyBgTm9uZWAg4oCUICJubyBuYW1lcGxhdGUgaGVyZSIg4oCUIHdoaWNoIGlzIGEgcGVyZmVjdGx5IG5vcm1hbCBhbnN3ZXIuCi0gKipgVkVSU0lPTl9SRWAqKiDigJQgYSB0aW55IHBhdHRlcm4gKGBcZCtcLlxkK2ApIHRoYXQgc3BvdHMgdGhpbmdzIGxpa2UgYDguOWAgb3IgYDQuOTZgOiBldmlkZW5jZSBvZiB2ZXJzaW9uIGRpc2Nsb3N1cmUuCi0gKipgZGVtb19tb2RlKClgKiog4oCUIHJlYWRzIHRoZSBzYW1wbGUgZmlsZSBsaW5lIGJ5IGxpbmUsIHNraXBwaW5nIGNvbW1lbnRzLCBhbmQgcnVucyB0aGUgc2FtZSBndWVzc2luZyBsb2dpYyBvbiBpdC4gU2FtZSBicmFpbiwgZmFrZSBlYXJzLgotICoqYG1haW4oKWAqKiDigJQgYXJndW1lbnQgcGFyc2luZyAoYC0tcG9ydHNgLCBgLS10aW1lb3V0YCwgYC0tZGVtb2ApLCB0aGVuIGxvb3BzIG92ZXIgdGhlIHBvcnRzIGFuZCBwcmludHMgYSBzbWFsbCByZXBvcnQ6IGJhbm5lciwgYmVzdCBndWVzcywgYW5kIHRoZSBoYXJkZW5pbmcgdGlwIHdoZXJlIHJlbGV2YW50LgoKIyMgS2V5IHRlcm1zLCB0cmFuc2xhdGVkCgp8IFRlcm0gfCBQbGFpbiBFbmdsaXNoIHwKfC0tLXwtLS18CnwgQmFubmVyIHwgVGhlIGdyZWV0aW5nIHRleHQgYSBzZXJ2aWNlIHNlbmRzIHdoZW4geW91IGNvbm5lY3QgfAp8IEJhbm5lciBncmFiYmluZyB8IFJlYWRpbmcgdGhvc2UgZ3JlZXRpbmdzIHRvIGlkZW50aWZ5IHNlcnZpY2VzIHwKfCBTZXJ2aWNlIGZpbmdlcnByaW50aW5nIHwgRmlndXJpbmcgb3V0ICp3aGF0KiBzb2Z0d2FyZSBpcyBydW5uaW5nIGZyb20gaXRzIGJlaGF2aW9yL3RleHQgfAp8IFZlcnNpb24gZGlzY2xvc3VyZSB8IEEgYmFubmVyIHRoYXQgbmFtZXMgdGhlIGV4YWN0IHZlcnNpb24g4oCUIGFuIGF0dGFja2VyIGZyZWViaWUgfAp8IExvY2FsaG9zdCAoMTI3LjAuMC4xKSB8ICJUaGlzIG1hY2hpbmUiIOKAlCBhIG5ldHdvcmsgYWRkcmVzcyB0aGF0IG5ldmVyIGxlYXZlcyB5b3VyIGxhcHRvcCB8CnwgVENQIGNvbm5lY3QgfCBUaGUgc3RhbmRhcmQgaGFuZHNoYWtlIGFueSBjbGllbnQgZG9lcyBiZWZvcmUgdGFsa2luZyB8CgojIyBIb3cgdG8gcnVuIGl0CgpgYGBiYXNoCmNkIGRhaWx5LXByb2plY3RzL2RheS0yMApweXRob24zIGJhbm5lcl9ncmFiYmVyLnB5ICAgICAgICAgICAgICAgICAjIGtub2NrIG9uIGNvbW1vbiBwb3J0cyBvbiB5b3VyIG93biBtYWNoaW5lCnB5dGhvbjMgYmFubmVyX2dyYWJiZXIucHkgLS1wb3J0cyAyMiw4MCAgICMgb25seSBjaGVjayB0aGVzZSBwb3J0cwpweXRob24zIGJhbm5lcl9ncmFiYmVyLnB5IC0tZGVtbyAgICAgICAgICAjIHNhbXBsZSBiYW5uZXJzLCBubyBuZXR3b3JrIGF0IGFsbApgYGAKCllvdSdsbCBuZWVkIFB5dGhvbiAzIChubyBleHRyYSBsaWJyYXJpZXMg4oCUIHRoaXMgaXMgc3RhbmRhcmQtbGlicmFyeS1vbmx5IGNvZGUpLgoKIyMgV2hhdCB0byBsZWFybiBuZXh0CgotICoqTm1hcCdzIHNlcnZpY2UgZGV0ZWN0aW9uKiogKGAtc1ZgKSBkb2VzIHRoaXMgc2FtZSBqb2IgYXQgcHJvZmVzc2lvbmFsIHNjYWxlLCB3aXRoIHRob3VzYW5kcyBvZiBmaW5nZXJwcmludHMuCi0gKipTaG9kYW4qKiBpcyBlc3NlbnRpYWxseSBiYW5uZXIgZ3JhYmJpbmcgZG9uZSBmb3IgdGhlIGVudGlyZSBpbnRlcm5ldCDigJQgZGVmZW5kZXJzIHVzZSBpdCB0byBmaW5kICp0aGVpciBvd24qIGV4cG9zZWQgc2VydmljZXMsIGF0dGFja2VycyB1c2UgaXQgdG8gc2hvcCBmb3IgdGFyZ2V0cy4KLSBUcnkgY2hlY2tpbmcgYSByZWFsIGJhbm5lciBvbiB5b3VyIG93biBtYWNoaW5lIChlLmcuIHNwaW4gdXAgYHB5dGhvbjMgLW0gaHR0cC5zZXJ2ZXJgIGFuZCBub3RlIGhvdyB0aGUgYFNlcnZlcjpgIGhlYWRlciBhbnN3ZXJzKSwgdGhlbiBsb29rIHVwIGhvdyB0byBzdXBwcmVzcyB2ZXJzaW9uIGluZm8gaW4gYSB3ZWIgc2VydmVyIGNvbmZpZyDigJQgdGhhdCBjb25maWcgY2hhbmdlIGlzIHJlYWwgaGFyZGVuaW5nLgotIFBhaXIgaXQgd2l0aCBkYXktMDIncyBwb3J0IHNjYW5uZXI6IGZpcnN0IGZpbmQgdGhlIG9wZW4gZG9vcnMsIHRoZW4gcmVhZCB0aGUgbmFtZXBsYXRlcy4gVGhhdCB0d28tc3RlcCBjb21ibyBpcyB0aGUgc3RhcnQgb2YgYW4gYXNzZXQgaW52ZW50b3J5IOKAlCB0aGUgZmlyc3QgdGhpbmcgYW55IHNlY3VyaXR5IHRlYW0gYnVpbGRzLgo=
+# Banner Grabber — reading the nameplates on your own doors
+
+**Day 20 · networking series · by Askarbek Akhrorov**
+Code: `banner_grabber.py` (+ `sample_banners.txt`)
+
+## What's new in this version (2026-11-12)
+
+The first version just read banners and guessed the service. This version turns the tool into something a SOC analyst would actually run on a schedule:
+
+- **Risk grades for every banner.** Each banner now gets a grade — LOW (a generic greeting that reveals almost nothing), MEDIUM (the software is named but no version is shown), or HIGH (an exact version is on show, so an attacker can look up exploits for it) — with a plain-English reason and one concrete hardening tip. Think of it like a health check: green, amber, red.
+- **Known-bad version watch.** A small watchlist flags versions with a famous bad reputation by name — vsftpd 2.3.4 (which shipped with a backdoor), very old OpenSSH, and end-of-life Apache 2.2 — so they jump out instead of blending in.
+- **Smarter version check.** The old version-spotter flagged `HTTP/1.1` as a software version; that was a false alarm, because 1.1 is the *protocol* version, not the software's. Fixed — only real software versions count now.
+- **`--file` mode.** Analyse banners saved in a text file (`PORT | BANNER`, one per line) instead of the network — handy for banners captured somewhere else and pasted in.
+- **`--json` mode.** Machine-readable output, so the results can feed a script or a SIEM instead of only a human's eyes.
+- **`--save` / `--compare` baselines.** Snapshot your banners, then later compare: NEW, CHANGED and GONE banners are listed. A service quietly changing its banner is worth a look — it might be a patch, or it might be something else.
+- **Friendlier errors and exit codes.** Bad ports, bad timeouts and missing files now explain the problem and exit with code 2 instead of crashing. Exit code 1 means "at least one HIGH-risk banner found" — the signal a scheduled script would watch for.
+- **5 new sample banners** in `--demo` (Apache 2.2, nginx, old OpenSSH 7.4, vsftpd 2.3.4, ProFTPD) so the new grading and watchlist are visible without any network.
+
+## The big idea (analogy first)
+
+Last time we walked the hallway and found which doors were open — that was the port scanner. Today we *knock on each open door and read the nameplate*.
+
+Almost every network service greets a new connection with a short message called a **banner**. It usually says what the service is and exactly which version: `SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.4`. Imagine every office door in a building had a little plaque reading "Door co. model 2017, lock serial 4482" — convenient for the maintenance crew, and equally convenient for a burglar who knows exactly which lock-picks fit model 2017.
+
+That's the double edge of banners:
+- **Defenders** use them to take inventory: what runs on my machine, and what needs patching?
+- **Attackers** use them for the same reason: an exact version number tells them which known exploit to try.
+
+This is why "version disclosure" — a service advertising its exact version — is treated as a misconfiguration in security hardening. One of the cheapest hardening wins there is: make the banner say less.
+
+## What the script does
+
+1. Connects to a list of common ports **on your own machine only** (127.0.0.1 — localhost; any other address is refused by design).
+2. Reads the first ~1 KB the service sends — the banner — then politely hangs up.
+3. Takes a best guess at which service it is (SSH server, web server, mail server…) from known banner fragments.
+4. Flags banners that leak a version number, with the hardening reminder.
+5. `--demo` mode replays real-world sample banners from `sample_banners.txt` with zero network traffic, so it works on any laptop — even one with nothing listening.
+
+HTTP servers don't volunteer a banner, so for those the script sends a minimal `HEAD /` request to coax a reply, like saying "hello?" through a door that doesn't have a nameplate.
+
+## How the code works (line by line, simple terms)
+
+- **`DEFAULT_PORTS`** — the usual suspects: 21 (FTP), 22 (SSH), 25/110/143 (mail), 80/443 (web), 3306 (MySQL), 3389 (RDP), and friends.
+- **`ALLOWED_TARGET = "127.0.0.1"`** — the safety lock. The whole script is built around this one constant: it can only ever knock on your own machine. Defensive education only.
+- **`KNOWN_SIGNATURES`** — a cheat sheet: if the banner contains "SSH-" it's an SSH server; "+OK" means POP3-style mail; "vsftpd" is vsftpd FTP, and so on. This is fingerprinting, simplified.
+- **`grab_banner(port, timeout)`** — opens a TCP connection (`socket.connect`), asks politely for up to 1024 bytes (`sock.recv`), decodes them into text, and closes the connection. If nothing answers (connection refused, timeout), it returns `None` — "no nameplate here" — which is a perfectly normal answer.
+- **`VERSION_RE`** — a tiny pattern (`\d+\.\d+`) that spots things like `8.9` or `4.96`: evidence of version disclosure.
+- **`demo_mode()`** — reads the sample file line by line, skipping comments, and runs the same guessing logic on it. Same brain, fake ears.
+- **`main()`** — argument parsing (`--ports`, `--timeout`, `--demo`), then loops over the ports and prints a small report: banner, best guess, and the hardening tip where relevant.
+
+## Key terms, translated
+
+| Term | Plain English |
+|---|---|
+| Banner | The greeting text a service sends when you connect |
+| Banner grabbing | Reading those greetings to identify services |
+| Service fingerprinting | Figuring out *what* software is running from its behavior/text |
+| Version disclosure | A banner that names the exact version — an attacker freebie |
+| Localhost (127.0.0.1) | "This machine" — a network address that never leaves your laptop |
+| TCP connect | The standard handshake any client does before talking |
+
+## How to run it
+
+```bash
+cd daily-projects/day-20
+python3 banner_grabber.py                 # knock on common ports on your own machine
+python3 banner_grabber.py --ports 22,80   # only check these ports
+python3 banner_grabber.py --demo          # sample banners, no network at all
+python3 banner_grabber.py --demo --json   # sample banners as JSON
+python3 banner_grabber.py --file sample_banners.txt   # analyse saved banners
+python3 banner_grabber.py --save baseline.json        # snapshot today's banners
+python3 banner_grabber.py --compare baseline.json     # spot what changed since
+```
+
+You'll need Python 3 (no extra libraries — this is standard-library-only code).
+
+## What to learn next
+
+- **Nmap's service detection** (`-sV`) does this same job at professional scale, with thousands of fingerprints.
+- **Shodan** is essentially banner grabbing done for the entire internet — defenders use it to find *their own* exposed services, attackers use it to shop for targets.
+- Try checking a real banner on your own machine (e.g. spin up `python3 -m http.server` and note how the `Server:` header answers), then look up how to suppress version info in a web server config — that config change is real hardening.
+- Pair it with day-02's port scanner: first find the open doors, then read the nameplates. That two-step combo is the start of an asset inventory — the first thing any security team builds.
