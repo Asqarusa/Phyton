@@ -13,15 +13,37 @@ phishing tells:
   4. Authentication-Results                     ("the wax seal: SPF / DKIM / DMARC")
   5. Link-text vs link-target mismatch          ("the label says one door, opens another")
   6. Urgency language in the subject            ("ACT NOW!!!" pressure tactics)
+  7. Message-ID domain mismatch                 ("the postmark disagrees with the letterhead")
+  8. Attachments, especially risky file types   ("what's taped to the envelope?")
+
+What's new in this version (2026-11-13):
+  * Full argparse CLI: --demo runs all three samples with a summary table,
+    --json prints a machine-readable report, --quiet prints just the verdict.
+  * Two new checks: Message-ID domain vs From domain, and attachments
+    (executable file types like .exe/.scr/.bat are flagged).
+  * Per-mechanism SPF/DKIM/DMARC verdicts are shown for every message
+    (pass/fail/missing), not only when something fails.
+  * "No Received stamps at all" is now flagged — real mail always has stamps.
+  * Exit codes mean something: 0 = CLEAN, 1 = SUSPICIOUS or LIKELY PHISHING,
+    2 = usage error (missing file, unreadable file, bad flag).
+  * Friendlier errors: a missing file, a directory, or an empty/garbled file
+    now gets a plain-English message instead of a Python traceback.
+  * A third sample, sample_bec.eml, shows a business-email-compromise style
+    message: the envelope looks perfect, but replies are quietly hijacked.
 
 Usage:
     python3 email_header_analyzer.py sample_phishing.eml
-    python3 email_header_analyzer.py my_suspicious_mail.eml
+    python3 email_header_analyzer.py --demo
+    python3 email_header_analyzer.py suspicious.eml --json
+    python3 email_header_analyzer.py suspicious.eml --quiet
 
-Everything here is read-only and safe: it only READS one file you give it,
+Everything here is read-only and safe: it only READS files you give it,
 never sends mail, never touches the network.
 """
 
+import argparse
+import json
+import os
 import re
 import sys
 from email import policy
@@ -38,6 +60,29 @@ URGENCY_WORDS = [
     "confirm now", "update now",
 ]
 
+# Brands attackers love to impersonate, and the real domain each one owns.
+# (Name in the display name -> domain the address should actually belong to.)
+BRAND_DOMAINS = {
+    "paypal": "paypal.com",
+    "apple": "apple.com",
+    "amazon": "amazon.com",
+    "microsoft": "microsoft.com",
+    "google": "google.com",
+    "netflix": "netflix.com",
+    "chase": "chase.com",
+    "coinbase": "coinbase.com",
+    "bank": None,          # any bank name: just needs a plausible bank domain
+    "irs": None,
+    "usps": "usps.com",
+    "fedex": "fedex.com",
+}
+
+# File types that should never arrive unannounced in an email attachment.
+RISKY_EXTENSIONS = {
+    ".exe", ".scr", ".bat", ".cmd", ".vbs", ".js", ".ps1", ".msi",
+    ".com", ".pif", ".jar", ".hta",
+}
+
 # How "phishy" the whole message is: findings add weight, score decides verdict.
 WEIGHTS = {
     "reply_to_mismatch": 25,     # Replies go somewhere OTHER than the sender
@@ -45,11 +90,14 @@ WEIGHTS = {
     "display_name_spoof": 20,    # Nameplate doesn't match the address behind it
     "auth_failed": 20,           # SPF/DKIM/DMARC says "not really from them"
     "link_mismatch": 20,         # Clickable label points somewhere else
+    "risky_attachment": 15,      # An executable-type file is attached
+    "message_id_mismatch": 10,   # Message-ID domain disagrees with From domain
+    "no_received": 10,           # No mail-server stamps at all — odd for real mail
     "external_first_hop": 10,    # First mail server is outside a mail provider
     "urgency": 10,               # Pressure language in the subject
 }
 
-DOC_IP_RE = re.compile(r"\b(203\.0\.113\.|198\.51\.100\.|192\.0\.2\.)\d{1,3}\b")
+SAMPLE_FILES = ["sample_phishing.eml", "sample_legit.eml", "sample_bec.eml"]
 
 
 def addr_of(header_value):
@@ -79,11 +127,34 @@ def display_name_of(header_value):
 
 
 def analyze(path):
-    with open(path, "rb") as f:
-        msg = BytesParser(policy=policy.default).parse(f)
+    """Read one .eml file and return (report dict, exit code).
+
+    The report dict holds everything the text and --json outputs need:
+    details (plain-English trace), findings (weight + text), auth verdicts,
+    attachments, score and verdict. Raises ValueError with a friendly
+    message when the file cannot be read or parsed at all.
+    """
+    if not os.path.exists(path):
+        raise ValueError("No such file: %s — check the spelling and try again." % path)
+    if os.path.isdir(path):
+        raise ValueError("'%s' is a folder, not an email file — pass a .eml file." % path)
+    if os.path.getsize(path) == 0:
+        raise ValueError("'%s' is empty — nothing to analyze." % path)
+
+    try:
+        with open(path, "rb") as f:
+            msg = BytesParser(policy=policy.default).parse(f)
+    except (OSError, ValueError) as exc:
+        raise ValueError("Could not read '%s' (%s)." % (path, exc))
+
+    if not msg["From"] and not msg["Subject"] and not msg.get_all("Received", []):
+        raise ValueError("'%s' does not look like an email — no From, Subject "
+                         "or Received headers found. Is it a .eml file?" % path)
 
     findings = []          # (weight, message) pairs
     details = []           # plain-English trace of what was checked
+    auth_verdicts = {}     # "spf" -> "pass"/"fail"/"missing", etc.
+    attachments = []       # (filename, content-type) pairs
 
     def check(weight, text):
         findings.append((WEIGHTS[weight], text))
@@ -116,12 +187,19 @@ def analyze(path):
     # If the name claims a brand but the address has nothing to do with it, flag it.
     name = display_name_of(from_h)
     from_dom = domain_of(from_addr)
-    if name and from_addr and re.search(r"(?i)paypal|apple|amazon|microsoft|google|bank|irs|netflix", name) \
-            and not re.search(r"(?i)paypal\.com|apple\.com|amazon\.com|microsoft\.com|google\.com|netflix\.com",
-                              from_dom):
-        check("display_name_spoof",
-              "Display name '%s' claims a well-known brand, but the address is %s."
-              % (name, from_addr))
+    if name and from_addr:
+        claimed = [brand for brand in BRAND_DOMAINS if brand in name.lower()]
+        if claimed:
+            real = [BRAND_DOMAINS[b] for b in claimed if BRAND_DOMAINS[b]]
+            if real and not any(from_dom == d or from_dom.endswith("." + d) for d in real):
+                check("display_name_spoof",
+                      "Display name '%s' claims a well-known brand, but the address is %s."
+                      % (name, from_addr))
+            elif not real and not re.search(r"(?i)bank|irs|gov", from_dom):
+                # "Bank"/"IRS" in the name but the address has no bank/gov hint.
+                check("display_name_spoof",
+                      "Display name '%s' claims a bank or the IRS, but the address is %s."
+                      % (name, from_addr))
 
     # --- Check 4: the Received chain — which post offices handled this? ------
     # Every mail server stamps the message as it passes it along, newest first.
@@ -131,7 +209,11 @@ def analyze(path):
     for i, hop in enumerate(reversed(received), 1):
         one_line = " ".join(str(hop).split())
         details.append("  hop %d: %s" % (i, one_line[:140]))
-    if received:
+    if not received:
+        check("no_received",
+              "No Received stamps at all — real mail always carries at least one "
+              "server stamp; this message may have been forged by hand.")
+    else:
         first_hop = " ".join(str(received[-1]).split())   # oldest = closest to sender
         ip_match = re.search(r"\[(\d+\.\d+\.\d+\.\d+)\]", first_hop)
         if ip_match and not ip_match.group(1).startswith(("10.", "192.168.", "172.16.")):
@@ -143,20 +225,54 @@ def analyze(path):
     # --- Check 5: authentication results — the wax seal -----------------------
     # SPF/DKIM/DMARC are DNS-published proofs. If a server checked them, it
     # writes the verdict in Authentication-Results. "fail" = the wax seal is broken.
+    # New in this version: every mechanism's verdict is reported, pass or fail.
     auth = str(msg.get("Authentication-Results", "")).lower()
     if auth:
         details.append("\nAuthentication-Results present:")
         for mech in ("spf", "dkim", "dmarc"):
             m = re.search(mech + r"=(\w+)", auth)
-            if m:
-                details.append("  %s: %s" % (mech.upper(), m.group(1)))
-                if m.group(1) in ("fail", "softfail"):
-                    check("auth_failed", "%s check FAILED — the sender failed a legitimacy proof."
-                          % mech.upper())
+            verdict = m.group(1) if m else "missing"
+            auth_verdicts[mech] = verdict
+            details.append("  %s: %s" % (mech.upper(), verdict))
+            if verdict in ("fail", "softfail"):
+                check("auth_failed", "%s check FAILED — the sender failed a legitimacy proof."
+                      % mech.upper())
     else:
+        auth_verdicts = {"spf": "missing", "dkim": "missing", "dmarc": "missing"}
         details.append("\nNo Authentication-Results header — no proof of sender legitimacy visible.")
 
-    # --- Check 6: do the clickable labels lie? --------------------------------
+    # --- Check 6: Message-ID domain vs From domain ---------------------------
+    # The Message-ID is stamped by the sending server and usually ends in the
+    # sender's domain. If it points somewhere else entirely, the letterhead
+    # and the postmark disagree.
+    msg_id = str(msg.get("Message-ID", "") or "")
+    id_match = re.search(r"@([\w.-]+)>", msg_id)
+    if id_match and from_dom:
+        id_dom = id_match.group(1).lower()
+        if id_dom != from_dom and not id_dom.endswith("." + from_dom) \
+                and not from_dom.endswith("." + id_dom):
+            check("message_id_mismatch",
+                  "Message-ID domain (%s) disagrees with the From domain (%s)."
+                  % (id_dom, from_dom))
+
+    # --- Check 7: attachments -------------------------------------------------
+    # List what is taped to the envelope. Executable file types (.exe, .scr,
+    # .bat, ...) arriving unannounced are a classic malware-delivery tell.
+    for part in msg.walk():
+        filename = part.get_filename()
+        if filename:
+            attachments.append((filename, part.get_content_type()))
+    if attachments:
+        details.append("\nAttachments (%d):" % len(attachments))
+        for filename, ctype in attachments:
+            ext = os.path.splitext(filename)[1].lower()
+            details.append("  %s (%s)" % (filename, ctype))
+            if ext in RISKY_EXTENSIONS:
+                check("risky_attachment",
+                      "Attachment '%s' is an executable file type (%s) — a common "
+                      "malware-delivery trick; do not open it." % (filename, ext))
+
+    # --- Check 8: do the clickable labels lie? --------------------------------
     # Classic trick: blue text says "paypal.com" but the link really goes to
     # an attacker's site. Compare what the eye sees with where the click goes.
     body = ""
@@ -183,7 +299,7 @@ def analyze(path):
                   "Link text shows '%s' but the click goes to %s."
                   % (text_dom.group(0), href_dom.group(1)))
 
-    # --- Check 7: pressure language ------------------------------------------
+    # --- Check 9: pressure language ------------------------------------------
     subject = str(msg["Subject"] or "").lower()
     hits = sorted({w for w in URGENCY_WORDS if re.search(r"\b" + re.escape(w) + r"\b", subject)})
     if hits:
@@ -200,33 +316,106 @@ def analyze(path):
     else:
         verdict, advice = "CLEAN (no common phishing tells found)", \
             "Still use common sense — this checks the envelope, not the letter's contents."
-    return details, findings, score, verdict, advice
+
+    report = {
+        "file": path,
+        "from": from_addr,
+        "subject": str(msg["Subject"] or ""),
+        "score": min(score, 100),
+        "verdict": verdict,
+        "advice": advice,
+        "auth": auth_verdicts,
+        "attachments": [{"filename": fn, "content_type": ct} for fn, ct in attachments],
+        "findings": [{"weight": w, "text": t} for w, t in sorted(findings, reverse=True)],
+        "details": details,
+    }
+    exit_code = 0 if score < 15 else 1
+    return report, exit_code
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python3 email_header_analyzer.py <message.eml>")
-        print("Try:   python3 email_header_analyzer.py sample_phishing.eml")
-        sys.exit(1)
-
-    details, findings, score, verdict, advice = analyze(sys.argv[1])
+def print_report(report, as_json=False, quiet=False):
+    """Print one report as text (default), JSON, or verdict-only."""
+    if quiet:
+        print("%s (%d/100)" % (report["verdict"], report["score"]))
+        return
+    if as_json:
+        report_out = {k: v for k, v in report.items() if k != "details"}
+        print(json.dumps(report_out, indent=2))
+        return
 
     print("=" * 64)
-    print("EMAIL HEADER ANALYZER — report")
+    print("EMAIL HEADER ANALYZER — report: %s" % report["file"])
     print("=" * 64)
-    print("\n".join(details))
+    print("\n".join(report["details"]))
 
-    print("\n--- Findings (%d) ---\n" % len(findings))
-    for weight, text in sorted(findings, reverse=True):
-        print("[+%d] %s" % (weight, text))
-    if not findings:
+    print("\n--- Findings (%d) ---\n" % len(report["findings"]))
+    for finding in report["findings"]:
+        print("[+%d] %s" % (finding["weight"], finding["text"]))
+    if not report["findings"]:
         print("(none — nothing phishy in the headers)")
 
     print("\n" + "-" * 64)
-    print("Risk score: %d/100" % min(score, 100))
-    print("Verdict:    %s" % verdict)
-    print("Next step:  %s" % advice)
+    print("Risk score: %d/100" % report["score"])
+    print("Verdict:    %s" % report["verdict"])
+    print("Next step:  %s" % report["advice"])
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(
+        description="Analyze an email's headers (.eml file) for phishing tells. "
+                    "Fully offline — it only reads the file you give it.")
+    parser.add_argument("file", nargs="?",
+                        help="the .eml file to analyze (not needed with --demo)")
+    parser.add_argument("--demo", action="store_true",
+                        help="analyze the three bundled sample emails and print a summary table")
+    parser.add_argument("--json", action="store_true",
+                        help="print the report as JSON instead of text")
+    parser.add_argument("--quiet", action="store_true",
+                        help="print only the verdict and score")
+    args = parser.parse_args(argv)
+
+    if args.demo:
+        rows = []
+        worst = 0
+        for name in SAMPLE_FILES:
+            here = os.path.join(os.path.dirname(os.path.abspath(__file__)), name)
+            if not os.path.exists(here):
+                print("Demo sample missing: %s (run from the script's folder)" % name)
+                return 2
+            try:
+                report, code = analyze(here)
+            except ValueError as exc:
+                print("Demo sample failed: %s" % exc)
+                return 2
+            rows.append((name, report["score"], report["verdict"]))
+            worst = max(worst, code)
+        print("%-22s %-8s %s" % ("FILE", "SCORE", "VERDICT"))
+        print("-" * 64)
+        for name, score, verdict in rows:
+            print("%-22s %-8d %s" % (name, score, verdict))
+        print("-" * 64)
+        print("Worst sample verdict above. Run one file directly for the full report, e.g.:")
+        print("  python3 email_header_analyzer.py sample_bec.eml")
+        return worst
+
+    if not args.file:
+        parser.print_usage(sys.stderr)
+        print("error: give me an .eml file to analyze, or use --demo to try the samples.",
+              file=sys.stderr)
+        return 2
+
+    if not args.file.lower().endswith(".eml"):
+        print("Note: '%s' does not end in .eml — analyzing it anyway." % args.file,
+              file=sys.stderr)
+    try:
+        report, exit_code = analyze(args.file)
+    except ValueError as exc:
+        print("Error: %s" % exc, file=sys.stderr)
+        return 2
+
+    print_report(report, as_json=args.json, quiet=args.quiet)
+    return exit_code
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

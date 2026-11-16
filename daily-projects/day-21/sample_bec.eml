@@ -1,0 +1,26 @@
+From: "Alex Chen, CFO" <alex.chen@example.com>
+Reply-To: alex.chen.finance@gmail.example
+Return-Path: <alex.chen@example.com>
+Subject: URGENT: wire transfer needed before end of day — please confirm now
+Date: Fri, 13 Nov 2026 12:00:00 +0000
+Message-ID: <20261113120000.5521@mail.example.com>
+Received: from mail.example.com (mail.example.com [198.51.100.25])
+        by mx.receiver.example with ESMTPS id z8QW21x9
+        for <accounting@example.com>; Fri, 13 Nov 2026 12:00:02 +0000
+Authentication-Results: mx.receiver.example;
+        spf=pass smtp.mailfrom=example.com;
+        dkim=pass header.d=example.com;
+        dmarc=pass action=none
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Hi,
+
+I'm in back-to-back meetings and can't take calls. I need you to process
+an urgent wire transfer to our new vendor today — $18,500. Please reply
+to this email with confirmation once it's sent and I will forward the
+payment details.
+
+Thanks,
+Alex
+Chief Financial Officer

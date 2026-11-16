@@ -1,7 +1,18 @@
 # Email Header Analyzer — reading the return address on the envelope
 
 **Day 21 · SOC analysis series · by Askarbek Akhrorov**
-Code: `email_header_analyzer.py` (+ `sample_phishing.eml`, `sample_legit.eml`)
+Code: `email_header_analyzer.py` (+ `sample_phishing.eml`, `sample_legit.eml`, `sample_bec.eml`)
+
+## What's new in this version (2026-11-13)
+
+I went back and improved this one, the same way a SOC analyst revisits a playbook after using it on real tickets:
+
+- **Two new checks.** The script now compares the **Message-ID domain** with the From domain (the postmark should agree with the letterhead), and it **lists attachments** — an `.exe`, `.scr` or `.bat` file taped to the envelope is flagged as a malware-delivery tell.
+- **A third sample: `sample_bec.eml`.** It shows a business-email-compromise message — the kind where the envelope looks *perfect* (SPF/DKIM/DMARC all pass) but replies are quietly hijacked to an outside address. The script still catches it: SUSPICIOUS, 35/100.
+- **The wax seal, in full.** SPF/DKIM/DMARC verdicts are now shown for *every* message — pass, fail, or missing — instead of only when something fails. A missing seal is information too.
+- **A proper command line.** `--demo` runs all three samples and prints a summary table, `--json` prints a machine-readable report (handy for feeding results into a SIEM or a spreadsheet), and `--quiet` prints just the verdict and score.
+- **Exit codes that mean something:** 0 = clean, 1 = suspicious or likely phishing, 2 = something went wrong with your input. Scripts can now branch on the result.
+- **Friendlier errors.** A missing file, a folder passed by mistake, or an empty/garbled file now gets a plain-English message instead of a Python traceback. And a message with **no Received stamps at all** is flagged — real mail always carries at least one server stamp.
 
 ## The big idea (analogy first)
 
@@ -9,7 +20,7 @@ Think of every email as a physical letter. The **message body** is the letter it
 
 Here's the catch: anyone can *write* anything on an envelope. A letter that says "From: Your Bank" in big letters might have been mailed from a basement. SOC analysts know this, so when someone reports a suspicious email, they don't start by reading the letter — they start by inspecting the **envelope**: who really sent it, which post offices touched it, whether the wax seal is genuine, and whether the return address agrees with the letterhead.
 
-This script does exactly that first look, automatically. It runs 6 checks and scores the email like an analyst's gut feeling, quantified.
+This script does exactly that first look, automatically. It runs 8 checks (6 in the first version, plus the Message-ID check and the attachment check added in this update) and scores the email like an analyst's gut feeling, quantified.
 
 ## What the script does
 
@@ -21,8 +32,10 @@ Point it at a saved email file (`.eml` — any mail app can save one) and it:
 4. **Reads the Authentication-Results "wax seal"** — SPF, DKIM, and DMARC are DNS-published proofs of legitimacy. If a server checked them and they *failed*, that's the seal broken.
 5. **Compares link text vs link target** — classic trick: blue text says `paypal.com/signin` but the click really goes somewhere else. The script catches the mismatch.
 6. **Sniffs for pressure language** — "URGENT", "suspended", "verify now". Attackers manufacture panic so you click before you think.
+7. **Compares the Message-ID with the From domain** *(new)* — the Message-ID is stamped by the sending server, so it should end in the sender's domain. If the postmark and the letterhead disagree, something was forged.
+8. **Lists attachments and flags risky file types** *(new)* — an `.exe`, `.scr`, `.bat` or similar file arriving unannounced is a classic malware-delivery trick.
 
-Each finding adds points (25 / 20 / 10 by severity); the total becomes a **risk score** and a verdict: **CLEAN**, **SUSPICIOUS**, or **LIKELY PHISHING**, plus the right next step for each.
+Each finding adds points (25 / 20 / 15 / 10 by severity); the total becomes a **risk score** and a verdict: **CLEAN**, **SUSPICIOUS**, or **LIKELY PHISHING**, plus the right next step for each.
 
 ## How the code works (line by line, simple terms)
 
@@ -53,6 +66,10 @@ Each finding adds points (25 / 20 / 10 by severity); the total becomes a **risk 
 cd daily-projects/day-21
 python3 email_header_analyzer.py sample_phishing.eml   # the spoofed one → LIKELY PHISHING
 python3 email_header_analyzer.py sample_legit.eml      # a normal message → CLEAN
+python3 email_header_analyzer.py sample_bec.eml        # clean envelope, hijacked replies → SUSPICIOUS
+python3 email_header_analyzer.py --demo                # all three samples, summary table
+python3 email_header_analyzer.py suspicious.eml --json # machine-readable report
+python3 email_header_analyzer.py suspicious.eml --quiet # verdict + score only
 ```
 
 To check your own suspicious email: in your mail app use *File → Save / Download* to get a `.eml` file, then run the script on it. Fully offline — nothing ever leaves your laptop.
