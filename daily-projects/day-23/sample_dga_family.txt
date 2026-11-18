@@ -1,0 +1,13 @@
+# One fake DGA family: same generator, same .xyz TLD, new name every day.
+# In real life this is what a DNS log looks like when one host is infected.
+zqxjklmvprtwnd8374.xyz
+q7f2k9d4m1x8z3.xyz
+bvcrtdxplmnqswz19.xyz
+k7q9z2w4x6v8b1d3p5f0rtw19zx.xyz
+wplmnbvcxzasdfg1234.xyz
+xkjhqwzmnbcv9876.xyz
+trqzxvbnm0987.xyz
+pwoeirqutylk2468.xyz
+mnbvcxzasdfgh1357.xyz
+lkjhgfdsapoiu2468.xyz
+google.com

@@ -1,0 +1,7 @@
+# Known-good domains — never flag these (one per line)
+google.com
+github.com
+microsoft.com
+wikipedia.org
+example.com
+rowan-cabarrus.edu
