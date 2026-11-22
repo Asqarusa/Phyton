@@ -19,6 +19,38 @@ Tuesday. A Type 10 (Remote Desktop) logon on a server at 3 AM from an address
 you've never seen is an incident. The word "success" is the same; the story
 isn't. This tool teaches you to read the story.
 
+## What's new in this version (2026-11-19)
+
+The tool went back to school and came back sharper — same building-doors
+analogy, four upgrades:
+
+1. **It now spots a guessed password that worked.** The original only
+   counted failed logons. Now it watches the *sequence*: if a user logs on
+   successfully right after 3+ failed attempts, the summary raises a
+   CRITICAL flag — "a guessed password may have worked." In the sample
+   story, `administrator` fails 6 times at 3 AM and then gets in. That
+   used to print as a burst warning; now it prints as a possible
+   compromise, with the advice to check what the account did next and
+   force a password reset.
+2. **It watches for lateral movement.** A new sample file
+   (`sample_lateral.txt`) tells a different story: one workstation making
+   6 Type 3 (network) logons in two minutes at 2 AM, then Kerberos
+   failures and a lockout. The summary now flags any source address with
+   5+ Type 3 logons — one machine touching many machines fast is the
+   footprint of an attacker hopping around your network.
+3. **Four more event IDs, including Kerberos.** 4740 (account locked out),
+   4768 / 4769 (Kerberos ticket requests) and 4771 (Kerberos
+   pre-authentication failed) are now explained, and 4771 failures count
+   toward the burst and success-after-failures checks.
+4. **New ways to use it.** `--json` prints machine-readable output for
+   piping into other tools; `--quiet` shows only flagged events plus the
+   summary; `--user` / `--ip` filter a batch to one person or address;
+   `--explain 4720` (optionally `--type 10`) looks up one event code like
+   a reference card, no log line needed. Exit codes are now honest:
+   0 = clean, 1 = something flagged, 2 = usage error. And small fixes:
+   a line that is only a timestamp no longer prints a confusing
+   "Event None", and a missing file gets a clear error instead of a crash.
+
 ## What the script does
 
 You feed it event-log lines — one per line, in a simple format — and it:
@@ -33,8 +65,14 @@ You feed it event-log lines — one per line, in a simple format — and it:
    cleartext logons, privilege and account-creation events — with a short
    note on why an analyst would look twice.
 4. **Prints a triage summary** at the end: counts per event, failed logons
-   per user with a burst warning, and a reminder that an alert is a lead,
-   not a verdict.
+   per user with a burst warning, a CRITICAL success-after-failures check
+   (a success right after 3+ failures), a lateral-movement watch (5+
+   Type 3 logons from one source), and a reminder that an alert is a lead,
+   not a verdict. Exit code 1 means something was flagged; 0 means clean.
+5. **Speaks JSON and filters, when asked.** `--json` prints the same
+   results as structured data; `--quiet` hides routine entries;
+   `--user` / `--ip` narrow a batch to one person or address; `--explain`
+   looks up a single event code like a reference card.
 
 It ships with a sample file (`sample_events.txt`) telling a realistic story:
 a normal morning shift, one human typo, then a night-time password-guessing
@@ -69,16 +107,34 @@ it and explains it — it never touches a live system.
   handful of simple rules to raise flags: failed logons, night-time RDP,
   cleartext logons, privilege/account events. No machine learning, no
   magic — just the same rules a junior analyst learns in week one.
+- **`analyze()`** — the new brain of the tool: it works out the
+  plain-English breakdown of one event (label, meaning, "door", flags)
+  and returns it as a dictionary instead of printing straight away.
+  Keeping analysis separate from printing is what makes `--json`
+  possible. **`explain()`** now just prints what `analyze()` found.
 - **`summarize()`** — the triage view: counts every event type, counts
   failed logons per user, and calls out a burst (5+ fails for one user)
-  with concrete next steps. This is the "morning briefing" version of the
-  data.
-- **`run()` / `main()` / `argparse`** — `run()` ties parse → explain →
-  summarize together; `main()` reads the command line: `--demo` for the
-  built-in story, `--file` for your own file, or a single event line in
-  quotes. No arguments prints help with a tip instead of crashing.
+  with concrete next steps. New in this version: it walks the events in
+  order and raises a CRITICAL flag when a success follows 3+ failures
+  for the same user, and it flags lateral movement when one source makes
+  5+ Type 3 logons. **`summarize_json()`** computes the same numbers
+  without printing, for `--json` mode. Both return an exit code
+  (0 = clean, 1 = flagged).
+- **`explain_code()`** — the `--explain` reference card: prints one
+  event ID's meaning (and one logon type's, with `--type`) without
+  needing a log line at all.
+- **`read_lines()`** — reads a file with a friendly error if it is
+  missing, instead of a Python traceback.
+- **`run()` / `main()` / `argparse`** — `run()` ties parse → analyze →
+  explain → summarize together, applying the `--user` / `--ip` filters
+  and the `--quiet` / `--json` output modes; `main()` reads the command
+  line: `--demo` for the built-in story, `--file` for your own file,
+  `--explain` for a code lookup, or a single event line in quotes.
+  No arguments prints help with a tip instead of crashing.
 - **`DEMO_LINES`** — the built-in sample story, so the tool teaches
   something useful the very first time you run it with zero setup.
+  **`sample_lateral.txt`** (new) is a second story: a Type 3 flood from
+  one workstation at 2 AM, Kerberos failures, and a lockout.
 
 ## Key terms, translated
 
@@ -90,6 +146,8 @@ it and explains it — it never touches a live system.
 | 4672 | "Special privileges assigned" — this logon got admin-level rights |
 | 4720 / 4732 | A new account was created / someone was added to a powerful group — classic attacker moves |
 | RDP (Remote Desktop) | Controlling a computer's screen from across the network — Logon Type 10 |
+| 4740 | Account locked out — too many failed logons tripped the lockout; the lockout stopped the guessing, but it proves someone was guessing |
+| 4768 / 4769 / 4771 | Kerberos ticket events — 4768/4769 are ticket requests (normal domain activity); 4771 is a failed Kerberos logon, and a burst of them is password guessing against the domain |
 | Lateral movement | An attacker hopping from one machine to another inside a network — often visible as Type 3 logon floods |
 | Triage | Sorting alerts into "routine / interesting / urgent" — what the summary at the end does |
 | RFC 5737 | The official list of fake IP ranges reserved for documentation — why the samples can never be real |
@@ -100,7 +158,15 @@ it and explains it — it never touches a live system.
 python3 logon_event_decoder.py --demo                  # the built-in story
 python3 logon_event_decoder.py --file sample_events.txt
 python3 logon_event_decoder.py "4624 | jdoe | 10"      # one event, quick check
+python3 logon_event_decoder.py --file sample_lateral.txt --quiet   # only the flagged bits
+python3 logon_event_decoder.py --file sample_events.txt --json     # machine-readable output
+python3 logon_event_decoder.py --file sample_events.txt --user administrator
+python3 logon_event_decoder.py --explain 4720          # look up one event code
+python3 logon_event_decoder.py --explain 4624 --type 10
 ```
+
+Exit code tells you the verdict at a glance: 0 = clean, 1 = something
+flagged, 2 = usage error (no parseable lines, bad filter, missing file).
 
 No installs, no network, no admin rights — any laptop with Python 3 runs it.
 
