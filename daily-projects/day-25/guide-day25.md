@@ -21,6 +21,40 @@ list — without making any calls itself — and translates each entry:
 who you're talking to, what service that usually means, and whether it
 looks ordinary or deserves a second look.
 
+## What's new in this version (improved 2026-11-22)
+
+Think of the first version as pulling the phone bill. This version also
+**compares today's bill with yesterday's**, so a brand-new number jumps
+out immediately — and it can read a bill someone saved earlier, on any
+computer.
+
+- **Baseline snapshots (`--save` / `--compare`)** — save today's list of
+  remote hosts, then compare the next run against it. New hosts are
+  listed as NEW, hosts that disappeared as GONE. In SOC work, *change*
+  is often the first clue: a computer that suddenly talks to a host it
+  never talked to before deserves a look.
+- **Saved-file mode (`--file`)** — point the tool at a saved
+  `/proc/net/tcp`-style text file (a new sample is included:
+  `sample_connections.txt`) and analyse it offline, including IPv6 rows.
+  Handy when the list was captured on another machine.
+- **Machine-readable output (`--json`)** — the same report as structured
+  data, for piping into other tools. `--quiet` shows only flagged hosts
+  plus the summary, `--all` also shows sockets that are not yet (or no
+  longer) established, and `--port N` zooms in on one remote port.
+- **A hidden-flag bug, fixed** — connections are grouped by remote host,
+  and the old code let only the *first* connection in a group decide the
+  verdict. A suspicious second connection to the same host could hide
+  behind an ordinary first one. Now the *worst* verdict in the group wins.
+- **Clearer warnings** — malformed rows are now counted and reported
+  instead of silently skipped, unencrypted services (plain HTTP, FTP,
+  Telnet…) get a plain-English warning, the port list grew (VPN, Docker,
+  Kubernetes, discovery services…), and the summary adds a per-zone
+  breakdown, the chattiest host, and the busiest remote port.
+- **Friendlier errors and exit codes** — a bad port number, a missing
+  file, or a broken baseline file now ends with a plain-English message
+  and exit code 2 instead of a traceback. Exit code 1 means at least one
+  `[CHECK]` was found, 0 means nothing was flagged.
+
 ## What the script does
 
 1. Reads the active-connection list from `/proc/net/tcp` and
@@ -36,9 +70,14 @@ looks ordinary or deserves a second look.
    - `[ok]` — ordinary outbound traffic to the public internet
    - `[CHECK]` — worth investigating: a port famously abused by attack
      tools (like 4444), or an uncommon port nobody can name
+   - `[CHECK]` — worth investigating: a port famously abused by attack
+     tools (like 4444), or an uncommon port nobody can name
    - `[demo]` — sample data (only in `--demo` mode)
-6. Prints a SOC triage summary: total conversations, unique remote
-   hosts, how many were flagged, and the next steps for each flag.
+7. Prints a SOC triage summary: total conversations, unique remote
+   hosts, how many were flagged, a breakdown by zone (loopback / LAN /
+   public / sample), the chattiest host and busiest remote port, and
+   the next steps for each flag. With `--save`/`--compare` it also
+   reports NEW and GONE hosts versus the saved baseline.
 
 Run it with `--demo` on any computer (even non-Linux) to see it work
 with built-in sample data. Every sample address comes from the
@@ -57,15 +96,26 @@ documentation ranges (192.0.2.x, 198.51.100.x, 203.0.113.x,
 - **`hex_to_ipv4` / `hex_to_ipv6`** — Linux stores addresses
   little-endian ("backwards"), so `0100007F` really means `127.0.0.1`.
   These functions flip the bytes back into the address you recognize.
-- **`parse_proc_lines`** — reads each row of the connection table,
-  skips the header and any malformed rows (bad input never crashes the
-  tool — it just gets skipped).
+- **`parse_proc_lines` / `parse_mixed_lines`** — read each row of the
+  connection table, skip the header, and *count* any malformed rows
+  (bad input never crashes the tool — it gets counted and reported).
+  The mixed version works out per row whether it is IPv4 or IPv6, for
+  `--file` mode.
+- **`PLAINTEXT_PORTS`** — ports whose traffic travels unencrypted. A
+  connection to one earns an extra warning reason, so the reader learns
+  *why* plain HTTP is fine for a web page but risky for private data.
 - **`classify_ip`** — buckets each remote address: loopback, private
   LAN, documentation/sample range, or public internet, using Python's
   built-in `ipaddress` module.
 - **`assess`** — the heart of the tool. It combines the zone, the port
   label, and the suspicious-port list into one verdict (`OK`, `CHECK`,
   or `SAMPLE`) plus the *reasons* — so every flag is explainable.
+- **`build_groups`** — groups connections by remote host and takes the
+  *worst* verdict in the group, then builds the summary (zone breakdown,
+  chattiest host, busiest port).
+- **`save_baseline` / `load_baseline` / `compare_keys`** — the baseline
+  snapshot: a small JSON file holding `host:port` strings, so the next
+  run can report exactly what is NEW and what is GONE.
 - **`print_report`** — groups conversations by remote host, prints the
   verdict table, then the triage summary with next steps.
 
@@ -75,7 +125,17 @@ documentation ranges (192.0.2.x, 198.51.100.x, 203.0.113.x,
 python3 active_connection_watcher.py            # live view (Linux)
 python3 active_connection_watcher.py --demo     # sample data, any OS
 python3 active_connection_watcher.py --verbose  # also show local socket + user id
+python3 active_connection_watcher.py --json     # machine-readable output
+python3 active_connection_watcher.py --quiet    # flagged hosts + summary only
+python3 active_connection_watcher.py --all      # include non-ESTABLISHED sockets
+python3 active_connection_watcher.py --port 443 # only connections to port 443
+python3 active_connection_watcher.py --file sample_connections.txt
+python3 active_connection_watcher.py --save baseline.json
+python3 active_connection_watcher.py --compare baseline.json
 ```
+
+Exit codes: `0` = nothing flagged, `1` = at least one `[CHECK]`,
+`2` = input/usage error (bad port, missing file, broken baseline).
 
 Requirements: Python 3, standard library only — no installs.
 
